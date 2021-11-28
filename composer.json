@@ -1,0 +1,21 @@
+{
+    "name": "bachtiar/laravel-toolkit-v1",
+    "description": "A Tool-Kit for Laravel Project v1",
+    "type": "library",
+    "authors": [
+        {
+            "name": "thebachtiarz",
+            "email": "bachtiarptibinlppnri2417@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "laravel/framework": "^8.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "TheBachtiarz\\Toolkit\\Cache\\": "src/cache-manager-module",
+            "TheBachtiarz\\Toolkit\\Helper\\": "src/helper-module"
+        }
+    }
+}
