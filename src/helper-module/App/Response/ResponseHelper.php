@@ -47,7 +47,7 @@ trait ResponseHelper
     /**
      * response resources with data
      *
-     * @param array $response_data
+     * @param mixed $response_data
      * @param string $stat
      * @param string $message
      * @param string $time
@@ -73,7 +73,7 @@ trait ResponseHelper
      * @param string $time
      * @return object
      */
-    public static function JsonResponse(mixed $response_data, string $message = '', int $httpRes = 200, string $status = '', string $time = ''): object
+    public static function JsonResponse($response_data, string $message = '', int $httpRes = 200, string $status = '', string $time = ''): object
     {
         $response = self::dataResponse($response_data, $status, $message, $time);
 

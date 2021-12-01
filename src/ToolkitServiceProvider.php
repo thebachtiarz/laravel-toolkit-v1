@@ -6,11 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class ToolkitServiceProvider extends ServiceProvider
 {
-    private const COMMANDS = [
-        \TheBachtiarz\Toolkit\Console\Commands\AppRefresh::class
-    ];
-
-    //
     /**
      * register module toolkit
      *
@@ -18,10 +13,12 @@ class ToolkitServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        config(['cache.default' => 'database']);
+        $applicationToolkitService = new ApplicationToolkitService;
+
+        $applicationToolkitService->registerConfig();
 
         if ($this->app->runningInConsole()) {
-            $this->commands(self::COMMANDS);
+            $this->commands($applicationToolkitService->registerCommands());
         }
     }
 

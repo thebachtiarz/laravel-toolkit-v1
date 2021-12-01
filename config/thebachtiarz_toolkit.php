@@ -27,11 +27,11 @@ return [
     | App Refresh Cache Class
     |--------------------------------------------------------------------------
     |
-    | This option will run cache service classes when "artisan app:refresh" run.
+    | This option will run cache service classes when "artisan app:refresh" run
+    | make sure there is a method named "process" inside the class
+    | otherwise will return an error message.
+    |
     |
     */
-    'app_refresh_cache_classes' => [
-        \Services\Cache\Ability\UserAbilityCacheService::class,
-        \Services\Cache\Commemorate\MemberCommemorateCacheService::class
-    ]
+    'app_refresh_cache_classes' => []
 ];

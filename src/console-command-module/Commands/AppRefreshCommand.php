@@ -8,21 +8,21 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
 
-class AppRefresh extends Command
+class AppRefreshCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:refresh';
+    protected $signature = 'toolkit:app:refresh';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Refresh the app for clean all cache etc.';
+    protected $description = 'Toolkit: Refresh the app for clean all cache etc.';
 
     /**
      * Create a new command instance.
