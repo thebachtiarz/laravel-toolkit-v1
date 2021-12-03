@@ -7,6 +7,8 @@ use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
+use TheBachtiarz\Toolkit\Cache\Interfaces\Data\ApplicationDataInterface;
+use TheBachtiarz\Toolkit\Console\Services\KeepCacheService;
 
 class AppRefreshCommand extends Command
 {
@@ -48,10 +50,16 @@ class AppRefreshCommand extends Command
             (new Process(explode(' ', 'php artisan down')))->run();
             Log::channel('maintenance')->info('~~ Application is now in maintenance mode.');
 
+            $keepCache = KeepCacheService::setKeepCacheName([
+                ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME
+            ])->backupCache();
+
             foreach (config('thebachtiarz_toolkit.app_refresh_artisan_commands') as $key => $command) {
                 Artisan::call($command['command']);
                 Log::channel('maintenance')->info($command['message']);
             }
+
+            $keepCache::restoreCache();
 
             // any module who need caching is execute here...
             if (count(config('thebachtiarz_toolkit.app_refresh_cache_classes')))

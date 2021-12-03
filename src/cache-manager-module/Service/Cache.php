@@ -54,12 +54,12 @@ class Cache
     }
 
     /**
-     * forget a cache data by key
+     * delete a cache data by key
      *
      * @param string $cacheName
      * @return boolean
      */
-    public static function forget(string $cacheName): bool
+    public static function delete(string $cacheName): bool
     {
         return LaravelCache::forget($cacheName);
     }
@@ -69,7 +69,7 @@ class Cache
      *
      * @return boolean
      */
-    public static function flush(): bool
+    public static function erase(): bool
     {
         return LaravelCache::flush();
     }

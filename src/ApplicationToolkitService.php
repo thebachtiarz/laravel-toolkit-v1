@@ -2,6 +2,7 @@
 
 namespace TheBachtiarz\Toolkit;
 
+use TheBachtiarz\Toolkit\Cache\Base\Cache as CacheBase;
 use TheBachtiarz\Toolkit\Console\Commands\AppRefreshCommand;
 use TheBachtiarz\Toolkit\Console\Commands\KeyGenerateCommand;
 
@@ -53,6 +54,12 @@ class ApplicationToolkitService
      */
     private function setConfigs(): void
     {
+        // ! app
+        config([
+            'app.name' => config('thebachtiarz_toolkit.app_name'),
+            'app.key' => config('thebachtiarz_toolkit.app_key')
+        ]);
+
         // ! cache
         config([
             'cache.default' => 'database'

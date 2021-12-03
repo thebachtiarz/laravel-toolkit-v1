@@ -38,7 +38,7 @@ class KeyGenerateCommand extends Command
     public function handle(): void
     {
         try {
-            $key = $this->applicationService->generateBase64Key();
+            $newKey = $this->applicationService->generateBase64Key();
 
             if (CacheService::has(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME)) {
                 $currentKey = CacheBase::appKey();
@@ -46,7 +46,11 @@ class KeyGenerateCommand extends Command
                 throw_if(((strlen($currentKey) !== 0) && (!$this->confirmToProceed())), 'Exception', "");
             }
 
-            CacheService::set(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME, $key);
+            CacheService::set(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME, $newKey);
+
+            $this->applicationService->replaceToolkitConfigFile([
+                ['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']
+            ]);
 
             Log::channel('application')->debug("- Successfully set new application key");
 
