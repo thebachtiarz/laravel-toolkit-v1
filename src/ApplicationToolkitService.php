@@ -79,9 +79,14 @@ class ApplicationToolkitService
                         'driver' => 'single',
                         'path' => base_path('toolkit_developer.log')
                     ],
+                    'error' => [
+                        'driver' => 'single',
+                        'level' => 'debug',
+                        'path' => base_path('toolkit_error.log')
+                    ],
                     'maintenance' => [
                         'driver' => 'single',
-                        'path' => base_path('toolkit_schedule.log')
+                        'path' => base_path('toolkit_maintenance.log')
                     ]
                 ]
             )

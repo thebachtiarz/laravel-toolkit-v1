@@ -46,11 +46,13 @@ class KeyGenerateCommand extends Command
                 throw_if(((strlen($currentKey) !== 0) && (!$this->confirmToProceed())), 'Exception', "");
             }
 
+            // TODO: set to config
             CacheService::set(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME, $newKey);
 
             $this->applicationService->replaceToolkitConfigFile([
                 ['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']
             ]);
+            // TODO: end
 
             Log::channel('application')->debug("- Successfully set new application key");
 

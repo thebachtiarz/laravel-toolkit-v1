@@ -43,4 +43,26 @@ trait ArrayHelper
     {
         return json_decode($data, $associative);
     }
+
+    /**
+     * convert to string
+     *
+     * @param mixed $value
+     * @return string|null
+     */
+    public static function serialize($value): ?string
+    {
+        return serialize($value);
+    }
+
+    /**
+     * convert to original data
+     *
+     * @param string $value
+     * @return mixed|null
+     */
+    public static function unserialize(string $value): ?mixed
+    {
+        return unserialize($value);
+    }
 }
