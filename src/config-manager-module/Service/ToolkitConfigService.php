@@ -3,27 +3,28 @@
 namespace TheBachtiarz\Toolkit\Config\Service;
 
 use Illuminate\Support\Facades\Log;
+use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Job\ToolkitConfigJob;
 
 class ToolkitConfigService
 {
-    //
-    private $_aaa = [
-        'name',
-        'access_group',
-        'is_enable',
-        'is_encrypt',
-        'value'
-    ];
-
-    private static ?string $name = null;
-    private static ?string $accessGroup = null;
-    private static ?bool $isEnable = null;
-    private static ?bool $isEncrypt = null;
-    private static ?mixed $value = null;
+    private static string $name;
+    private static string $accessGroup = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE;
+    private static bool $isEnable = true;
+    private static bool $isEncrypt = false;
+    private static $value;
 
     // ? Public Methods
-    public static function get(): ?string
+    /**
+     * get config service
+     *
+     * ! require: name
+     *
+     * ? extra: isEnable, accessGroup
+     *
+     * @return mixed|null
+     */
+    public static function get()
     {
         try {
             return ToolkitConfigJob::get(
@@ -34,6 +35,52 @@ class ToolkitConfigService
         } catch (\Throwable $th) {
             Log::channel('error')->error($th->getMessage());
             return null;
+        }
+    }
+
+    /**
+     * set config service
+     *
+     * ! require: name, value
+     *
+     * ? extra: isEncrypt, accessGroup
+     *
+     * @return boolean
+     */
+    public static function set(): bool
+    {
+        try {
+            return (bool) ToolkitConfigJob::set(
+                ...self::arguments([
+                    'name', 'value', 'isEncrypt', 'accessGroup'
+                ])
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error')->error($th->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * delete config service
+     *
+     * ! require: name
+     *
+     * ? extra: accessGroup
+     *
+     * @return boolean
+     */
+    public static function delete(): bool
+    {
+        try {
+            return (bool) ToolkitConfigJob::delete(
+                ...self::arguments([
+                    'name', 'accessGroup'
+                ])
+            );
+        } catch (\Throwable $th) {
+            Log::channel('error')->error($th->getMessage());
+            return false;
         }
     }
 
@@ -50,8 +97,7 @@ class ToolkitConfigService
             $args = [];
 
             foreach ($arguments as $key => $argument)
-                if (self::${$argument})
-                    $args[] = self::${$argument};
+                $args[] = self::${$argument};
 
             return $args;
         } catch (\Throwable $th) {
@@ -67,7 +113,7 @@ class ToolkitConfigService
      * @param string $name
      * @return self
      */
-    public static function setName(string $name): self
+    public static function name(string $name): self
     {
         self::$name = $name;
 
@@ -80,7 +126,7 @@ class ToolkitConfigService
      * @param string $accessGroup
      * @return self
      */
-    public static function setAccessGroup(string $accessGroup): self
+    public static function accessGroup(string $accessGroup): self
     {
         self::$accessGroup = $accessGroup;
 
@@ -119,7 +165,7 @@ class ToolkitConfigService
      * @param mixed $value
      * @return self
      */
-    public static function setValue($value): self
+    public static function value($value): self
     {
         self::$value = $value;
 

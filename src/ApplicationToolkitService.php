@@ -2,7 +2,6 @@
 
 namespace TheBachtiarz\Toolkit;
 
-use TheBachtiarz\Toolkit\Cache\Base\Cache as CacheBase;
 use TheBachtiarz\Toolkit\Console\Commands\AppRefreshCommand;
 use TheBachtiarz\Toolkit\Console\Commands\KeyGenerateCommand;
 
@@ -54,42 +53,7 @@ class ApplicationToolkitService
      */
     private function setConfigs(): void
     {
-        // ! app
-        config([
-            'app.name' => config('thebachtiarz_toolkit.app_name'),
-            'app.key' => config('thebachtiarz_toolkit.app_key')
-        ]);
-
-        // ! cache
-        config([
-            'cache.default' => 'database'
-        ]);
-
-        // ! logging
-        $logging = config('logging.channels');
-        config([
-            'logging.channels' => array_merge(
-                $logging,
-                [
-                    'application' => [
-                        'driver' => 'single',
-                        'path' => base_path('toolkit_application.log')
-                    ],
-                    'developer' => [
-                        'driver' => 'single',
-                        'path' => base_path('toolkit_developer.log')
-                    ],
-                    'error' => [
-                        'driver' => 'single',
-                        'level' => 'debug',
-                        'path' => base_path('toolkit_error.log')
-                    ],
-                    'maintenance' => [
-                        'driver' => 'single',
-                        'path' => base_path('toolkit_maintenance.log')
-                    ]
-                ]
-            )
-        ]);
+        foreach (DataService::registerConfig() as $key => $register)
+            config($register);
     }
 }

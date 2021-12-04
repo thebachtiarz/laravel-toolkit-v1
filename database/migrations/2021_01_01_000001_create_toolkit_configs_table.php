@@ -16,7 +16,7 @@ class CreateToolkitConfigsTable extends Migration
     {
         Schema::create('toolkit_configs', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('access_group', 2)->default(ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE);
             $table->boolean('is_enable')->default(1);
             $table->boolean('is_encrypt')->default(0);

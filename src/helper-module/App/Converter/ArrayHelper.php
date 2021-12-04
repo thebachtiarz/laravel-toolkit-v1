@@ -61,7 +61,7 @@ trait ArrayHelper
      * @param string $value
      * @return mixed|null
      */
-    public static function unserialize(string $value): ?mixed
+    public static function unserialize(string $value)
     {
         return unserialize($value);
     }

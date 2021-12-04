@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Cache\Base\Cache as CacheBase;
 use TheBachtiarz\Toolkit\Cache\Interfaces\Data\ApplicationDataInterface;
 use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
+use TheBachtiarz\Toolkit\Config\Helper\ConfigHelper;
+use TheBachtiarz\Toolkit\Config\Service\ToolkitConfigService;
 use TheBachtiarz\Toolkit\Console\Services\ApplicationService;
 
 class KeyGenerateCommand extends Command
 {
-    use ConfirmableTrait;
+    use ConfirmableTrait, ConfigHelper;
 
     /**
      * The name and signature of the console command.
@@ -46,13 +48,11 @@ class KeyGenerateCommand extends Command
                 throw_if(((strlen($currentKey) !== 0) && (!$this->confirmToProceed())), 'Exception', "");
             }
 
-            // TODO: set to config
-            CacheService::set(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME, $newKey);
+            ToolkitConfigService::name(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME)->value($newKey)->accessGroup('2')->set();
 
-            $this->applicationService->replaceToolkitConfigFile([
+            self::replaceToolkitConfigFile([
                 ['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']
             ]);
-            // TODO: end
 
             Log::channel('application')->debug("- Successfully set new application key");
 

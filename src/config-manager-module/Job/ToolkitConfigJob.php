@@ -24,7 +24,7 @@ class ToolkitConfigJob
         string $name,
         bool $is_enable = true,
         string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
-    ): ?mixed {
+    ) {
         try {
             $config = self::getConfigData($name, $is_enable, $access_group);
             throw_if(!$config, 'Exception', "config not found");
@@ -190,7 +190,7 @@ class ToolkitConfigJob
      * @param boolean $is_encrypt
      * @return mixed|null
      */
-    private static function unserializeConfig(string $value, bool $is_encrypt = false): ?mixed
+    private static function unserializeConfig(string $value, bool $is_encrypt = false)
     {
         try {
             $config = self::unserialize($value);
