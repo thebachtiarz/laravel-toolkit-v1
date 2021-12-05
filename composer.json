@@ -24,6 +24,7 @@
     "autoload": {
         "psr-4": {
             "TheBachtiarz\\Toolkit\\": "src/",
+            "TheBachtiarz\\Toolkit\\Backend\\": "src/toolkit-backend-service/",
             "TheBachtiarz\\Toolkit\\Cache\\": "src/cache-manager-module/",
             "TheBachtiarz\\Toolkit\\Config\\": "src/config-manager-module/",
             "TheBachtiarz\\Toolkit\\Console\\": "src/console-command-module/",
