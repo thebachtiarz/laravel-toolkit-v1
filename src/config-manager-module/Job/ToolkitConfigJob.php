@@ -23,7 +23,7 @@ class ToolkitConfigJob
     public static function get(
         string $name,
         bool $is_enable = true,
-        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
+        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE
     ) {
         try {
             $config = self::getConfigData($name, $is_enable, $access_group);
@@ -48,7 +48,7 @@ class ToolkitConfigJob
         string $name,
         $value,
         bool $is_encrypt = false,
-        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
+        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE
     ): ?ToolkitConfig {
         try {
             return self::setConfigData(
@@ -72,7 +72,7 @@ class ToolkitConfigJob
      */
     public static function delete(
         string $name,
-        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
+        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE
     ): ?bool {
         try {
             return self::deleteConfigData($name, $access_group);
@@ -94,7 +94,7 @@ class ToolkitConfigJob
     private static function getConfigData(
         string $name,
         bool $is_enable = true,
-        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
+        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE
     ): ?ToolkitConfig {
         try {
             return ToolkitConfig::where([
@@ -121,20 +121,13 @@ class ToolkitConfigJob
         string $name,
         string $value,
         bool $is_encrypt = false,
-        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
+        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE
     ): ?ToolkitConfig {
         try {
             return ToolkitConfig::updateOrCreate(
                 ['name' => $name, 'access_group' => $access_group],
                 ['is_encrypt' => $is_encrypt, 'value' => $value]
             );
-
-            // return ToolkitConfig::create([
-            //     'name' => $name,
-            //     'access_group' => $access_group,
-            //     'is_encrypt' => $is_encrypt,
-            //     'value' => $value
-            // ]);
         } catch (\Throwable $th) {
             Log::channel('error')->error($th->getMessage());
             return null;
@@ -150,7 +143,7 @@ class ToolkitConfigJob
      */
     private static function deleteConfigData(
         string $name,
-        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE
+        string $access_group = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE
     ): bool {
         try {
             return ToolkitConfig::where([

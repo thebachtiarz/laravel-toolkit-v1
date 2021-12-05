@@ -2,6 +2,8 @@
 
 namespace TheBachtiarz\Toolkit;
 
+use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
+
 class DataService
 {
     /**
@@ -16,10 +18,10 @@ class DataService
 
         // ! app
         $registerConfig[] = [
-            'app.name' => config('thebachtiarz_toolkit.app_name'),
-            'app.key' => config('thebachtiarz_toolkit.app_key'),
-            'app.url' => config('thebachtiarz_toolkit.app_url'),
-            'app.timezone' => config('thebachtiarz_toolkit.app_timezone')
+            'app.name' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
+            'app.url' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
+            'app.timezone' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
+            'app.key' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
         ];
 
         // ! cache

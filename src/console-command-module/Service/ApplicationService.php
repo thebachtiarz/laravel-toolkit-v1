@@ -1,6 +1,6 @@
 <?php
 
-namespace TheBachtiarz\Toolkit\Console\Services;
+namespace TheBachtiarz\Toolkit\Console\Service;
 
 use Illuminate\Encryption\Encrypter;
 

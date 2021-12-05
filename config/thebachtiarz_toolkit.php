@@ -27,6 +27,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here your application timezone are stored.
+    | @see \DateTimeZone::listIdentifiers()
     |
     */
     'app_timezone' => "",

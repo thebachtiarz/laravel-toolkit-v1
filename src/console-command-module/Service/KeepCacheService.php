@@ -1,6 +1,6 @@
 <?php
 
-namespace TheBachtiarz\Toolkit\Console\Services;
+namespace TheBachtiarz\Toolkit\Console\Service;
 
 use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
 

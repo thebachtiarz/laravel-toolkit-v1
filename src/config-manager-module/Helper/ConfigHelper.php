@@ -3,13 +3,14 @@
 namespace TheBachtiarz\Toolkit\Config\Helper;
 
 use Illuminate\Support\Facades\Log;
+use TheBachtiarz\Toolkit\ToolkitInterface;
 
 trait ConfigHelper
 {
     /**
      * replace [toolkit] config static value
      *
-     * sample : ['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']
+     * sample : [['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']]
      *
      * @param array $replaces
      * @return boolean
@@ -17,7 +18,7 @@ trait ConfigHelper
     public static function replaceToolkitConfigFile(array $replaces = []): bool
     {
         try {
-            $configPath = config_path('thebachtiarz_toolkit.php');
+            $configPath = config_path(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php');
             $_isFileExist = file_exists($configPath);
             if ($_isFileExist) {
                 foreach ($replaces as $key => $replace) {

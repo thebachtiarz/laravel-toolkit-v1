@@ -35,7 +35,7 @@ class ToolkitServiceProvider extends ServiceProvider
             ], 'toolkit-migrations');
 
             $this->publishes([
-                __DIR__ . '/../config/thebachtiarz_toolkit.php' => config_path('thebachtiarz_toolkit.php'),
+                __DIR__ . '/../config/' . ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php' => config_path(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php'),
             ], 'toolkit-config');
         }
     }

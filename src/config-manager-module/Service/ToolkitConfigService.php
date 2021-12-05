@@ -9,7 +9,7 @@ use TheBachtiarz\Toolkit\Config\Job\ToolkitConfigJob;
 class ToolkitConfigService
 {
     private static string $name;
-    private static string $accessGroup = ToolkitConfigInterface::TOOLKIT_CONFIG_USER_CODE;
+    private static string $accessGroup = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE;
     private static bool $isEnable = true;
     private static bool $isEncrypt = false;
     private static $value;

@@ -6,11 +6,12 @@ use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Cache\Base\Cache as CacheBase;
-use TheBachtiarz\Toolkit\Cache\Interfaces\Data\ApplicationDataInterface;
 use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
 use TheBachtiarz\Toolkit\Config\Helper\ConfigHelper;
+use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Service\ToolkitConfigService;
-use TheBachtiarz\Toolkit\Console\Services\ApplicationService;
+use TheBachtiarz\Toolkit\Console\Service\ApplicationService;
+use TheBachtiarz\Toolkit\ToolkitInterface;
 
 class KeyGenerateCommand extends Command
 {
@@ -42,16 +43,24 @@ class KeyGenerateCommand extends Command
         try {
             $newKey = $this->applicationService->generateBase64Key();
 
-            if (CacheService::has(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME)) {
+            if (CacheService::has(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)) {
                 $currentKey = CacheBase::appKey();
 
                 throw_if(((strlen($currentKey) !== 0) && (!$this->confirmToProceed())), 'Exception', "");
             }
 
-            ToolkitConfigService::name(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME)->value($newKey)->accessGroup('2')->set();
+            ToolkitConfigService::name(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
+                ->value($newKey)
+                ->accessGroup(ToolkitConfigInterface::TOOLKIT_CONFIG_PRIVATE_CODE)
+                ->set();
 
             self::replaceToolkitConfigFile([
-                ['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']
+                [
+                    'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME,
+                    'old' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME),
+                    'new' => $newKey,
+                    'tag_value' => '"'
+                ]
             ]);
 
             Log::channel('application')->debug("- Successfully set new application key");

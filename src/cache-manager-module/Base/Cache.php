@@ -2,8 +2,8 @@
 
 namespace TheBachtiarz\Toolkit\Cache\Base;
 
-use TheBachtiarz\Toolkit\Cache\Interfaces\Data\ApplicationDataInterface;
 use TheBachtiarz\Toolkit\Cache\Service\Cache as ToolkitCache;
+use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 
 class Cache
 {
@@ -14,6 +14,6 @@ class Cache
      */
     public static function appKey(): string
     {
-        return ToolkitCache::get(ApplicationDataInterface::TOOLKIT_APP_KEY_CACHE_NAME);
+        return ToolkitCache::get(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME);
     }
 }
