@@ -8,6 +8,8 @@ return [
     |
     | Here your application name are stored.
     |
+    | ! this config is mutable !
+    |
     */
     'app_name' => "",
 
@@ -17,6 +19,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here your application url are stored.
+    |
+    | ! this config is mutable !
     |
     */
     'app_url' => "",
@@ -29,6 +33,8 @@ return [
     | Here your application timezone are stored.
     | @see \DateTimeZone::listIdentifiers()
     |
+    | ! this config is mutable !
+    |
     */
     'app_timezone' => "",
 
@@ -38,6 +44,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here your application key are stored.
+    |
+    | ! this config is mutable !
     |
     */
     'app_key' => "",

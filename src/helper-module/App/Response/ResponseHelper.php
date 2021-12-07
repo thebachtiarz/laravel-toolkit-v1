@@ -11,40 +11,6 @@ trait ResponseHelper
     public static string $error403 = "Sorry, you don't have access here";
 
     /**
-     * response success with data
-     *
-     * @param string $message
-     * @param array ...$response_data
-     * @return array
-     */
-    public static function successResponse(string $message, ...$response_data): array
-    {
-        return ['status' => 'success', 'message' => $message, 'response_data' => $response_data];
-    }
-
-    /**
-     * response info
-     *
-     * @param string $message
-     * @return array
-     */
-    public static function infoResponse($message): array
-    {
-        return ['status' => 'info', 'message' => $message];
-    }
-
-    /**
-     * response error
-     *
-     * @param string $message
-     * @return array
-     */
-    public static function errorResponse($message): array
-    {
-        return ['status' => 'error', 'message' => $message];
-    }
-
-    /**
      * response resources with data
      *
      * @param mixed $response_data
@@ -78,6 +44,17 @@ trait ResponseHelper
         $response = self::dataResponse($response_data, $status, $message, $time);
 
         return response()->json($response, $httpRes);
+    }
+
+    /**
+     * response error
+     *
+     * @param string $message
+     * @return array
+     */
+    public static function errorResponse($message): array
+    {
+        return ['status' => 'error', 'message' => $message];
     }
 
     /**
