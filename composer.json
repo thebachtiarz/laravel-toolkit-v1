@@ -2,6 +2,8 @@
     "name": "thebachtiarz/laravel-toolkit-v1",
     "description": "A Tool-Kit for Laravel Project v1",
     "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
     "keywords": [
         "laravel",
         "thebachtiarz",
