@@ -18,10 +18,10 @@ class DataService
 
         // ! app
         $registerConfig[] = [
-            'app.name' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
-            'app.url' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
-            'app.timezone' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
-            'app.key' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
+            'app.name' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
+            'app.url' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
+            'app.timezone' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
+            'app.key' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
         ];
 
         // ! cache

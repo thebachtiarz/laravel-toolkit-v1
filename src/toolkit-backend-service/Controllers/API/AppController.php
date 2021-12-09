@@ -24,7 +24,7 @@ class AppController extends Controller
     public function getAppName(Request $request)
     {
         $config = ConfigBackendService::getAppName()
-            ?? config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME)
+            ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME)
             ?? '';
 
         return self::JsonResponse($config);
@@ -39,7 +39,7 @@ class AppController extends Controller
     public function getAppUrl(Request $request)
     {
         $config = ConfigBackendService::getAppUrl()
-            ?? config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME)
+            ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME)
             ?? '';
 
         return self::JsonResponse($config);
@@ -54,7 +54,7 @@ class AppController extends Controller
     public function getAppTimezone(Request $request)
     {
         $config = ConfigBackendService::getAppTimezone()
-            ?? config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME)
+            ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME)
             ?? '';
 
         return self::JsonResponse($config);

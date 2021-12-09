@@ -59,7 +59,7 @@ class ConfigBackendService
             self::replaceToolkitConfigFile([
                 [
                     'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME,
-                    'old' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
+                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
                     'new' => $appName,
                     'tag_value' => '"'
                 ]
@@ -88,7 +88,7 @@ class ConfigBackendService
             self::replaceToolkitConfigFile([
                 [
                     'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME,
-                    'old' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
+                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
                     'new' => $appUrl,
                     'tag_value' => '"'
                 ]
@@ -117,7 +117,7 @@ class ConfigBackendService
             self::replaceToolkitConfigFile([
                 [
                     'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME,
-                    'old' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
+                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
                     'new' => $appTimezone,
                     'tag_value' => '"'
                 ]

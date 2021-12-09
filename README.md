@@ -26,7 +26,7 @@ composer require thebachtiarz/laravel-toolkit-v1
 ```bash
 Route::namespace($this->namespace)
     ->middleware(['api'])
-    ->group(base_path('vendor/thebachtiarz/laravel-toolkit-v1/src/toolkit-backend-service/routes/toolkit_api.php'));
+    ->group(tbtoolkitrouteapi());
 ```
 
 -------

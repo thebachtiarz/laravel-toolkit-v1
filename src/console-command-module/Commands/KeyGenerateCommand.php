@@ -57,7 +57,7 @@ class KeyGenerateCommand extends Command
             self::replaceToolkitConfigFile([
                 [
                     'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME,
-                    'old' => config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.' . ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME),
+                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME),
                     'new' => $newKey,
                     'tag_value' => '"'
                 ]
