@@ -7,7 +7,6 @@ use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
-use TheBachtiarz\Toolkit\ToolkitInterface;
 
 class AppRefreshCommand extends Command
 {
@@ -49,14 +48,14 @@ class AppRefreshCommand extends Command
             (new Process(explode(' ', 'php artisan down')))->run();
             Log::channel('maintenance')->info('~~ Application is now in maintenance mode.');
 
-            foreach (config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.app_refresh_artisan_commands') as $key => $command) {
+            foreach (tbtoolkitconfig('app_refresh_artisan_commands') as $key => $command) {
                 Artisan::call($command['command']);
                 Log::channel('maintenance')->info($command['message']);
             }
 
             // any module who need caching is execute here...
-            if (count(config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.app_refresh_cache_classes')))
-                foreach (config(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.app_refresh_cache_classes') as $key => $class)
+            if (count(tbtoolkitconfig('app_refresh_cache_classes')))
+                foreach (tbtoolkitconfig('app_refresh_cache_classes') as $key => $class)
                     $class::process();
 
             $this->composer->dumpAutoloads();

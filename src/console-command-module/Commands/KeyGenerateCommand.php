@@ -11,7 +11,6 @@ use TheBachtiarz\Toolkit\Config\Helper\ConfigHelper;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Service\ToolkitConfigService;
 use TheBachtiarz\Toolkit\Console\Service\ApplicationService;
-use TheBachtiarz\Toolkit\ToolkitInterface;
 
 class KeyGenerateCommand extends Command
 {

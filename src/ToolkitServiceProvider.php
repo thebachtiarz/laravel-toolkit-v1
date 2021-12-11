@@ -31,12 +31,12 @@ class ToolkitServiceProvider extends ServiceProvider
     {
         if (app()->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations'),
-            ], 'toolkit-migrations');
+                __DIR__ . '/../config/' . ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php' => config_path(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php'),
+            ], 'thebachtiarz-toolkit-config');
 
             $this->publishes([
-                __DIR__ . '/../config/' . ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php' => config_path(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php'),
-            ], 'toolkit-config');
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
+            ], 'thebachtiarz-toolkit-migrations');
         }
     }
 }
