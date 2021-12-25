@@ -20,6 +20,16 @@ trait CarbonHelper
     }
 
     /**
+     * get date time now in timezone
+     *
+     * @return string
+     */
+    public static function dbDateTimeNowTimezone(): string
+    {
+        return Carbon::now()->setTimezone(tbtoolkitconfig('app_timezone'));
+    }
+
+    /**
      * parse date time
      * for human
      *
