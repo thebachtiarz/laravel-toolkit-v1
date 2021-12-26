@@ -103,6 +103,58 @@ trait CarbonHelper
     }
 
     /**
+     * get date time by specific add days from now
+     * for database
+     * default = 30 days
+     *
+     * @param integer $days
+     * @return string
+     */
+    public static function dbGetFullDateAddDays(int $days = 30): string
+    {
+        return Carbon::now()->addDays($days);
+    }
+
+    /**
+     * get date time by specific add hours from now
+     * for database
+     * default = 24 hours
+     *
+     * @param integer $hours
+     * @return string
+     */
+    public static function dbGetFullDateAddHours(int $hours = 24): string
+    {
+        return Carbon::now()->addHours($hours);
+    }
+
+    /**
+     * get date time by specific add minutes from now
+     * for database
+     * default = 60 minutes
+     *
+     * @param integer $minutes
+     * @return string
+     */
+    public static function dbGetFullDateAddMinutes(int $minutes = 60): string
+    {
+        return Carbon::now()->addMinutes($minutes);
+    }
+
+    /**
+     * get date time by specific add seconds from now
+     * for database
+     * default = 60 second
+     *
+     * @param integer $seconds
+     * @return string
+     */
+    public static function dbGetFullDateAddSeconds(int $seconds = 60): string
+    {
+        return Carbon::now()->addSeconds($seconds);
+    }
+
+    /**
      * get date time by specific sub days from now
      * for database
      * default = 30 days
@@ -116,14 +168,40 @@ trait CarbonHelper
     }
 
     /**
+     * get date time by specific sub hours from now
+     * for database
+     * default = 24 hours
+     *
+     * @param integer $hours
+     * @return string
+     */
+    public static function dbGetFullDateSubHours(int $hours = 24): string
+    {
+        return Carbon::now()->subHours($hours);
+    }
+
+    /**
+     * get date time by specific sub minutes from now
+     * for database
+     * default = 60 minutes
+     *
+     * @param integer $minutes
+     * @return string
+     */
+    public static function dbGetFullDateSubMinutes(int $minutes = 60): string
+    {
+        return Carbon::now()->subMinutes($minutes);
+    }
+
+    /**
      * get date time by specific sub seconds from now
      * for database
-     * default = 1 second
+     * default = 60 second
      *
      * @param integer $seconds
      * @return string
      */
-    public static function dbGetFullDateSubSeconds(int $seconds = 1): string
+    public static function dbGetFullDateSubSeconds(int $seconds = 60): string
     {
         return Carbon::now()->subSeconds($seconds);
     }
