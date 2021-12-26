@@ -52,13 +52,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | App Refresh Artisan Command
+    | App Refresh Artisan Command Before
     |--------------------------------------------------------------------------
     |
     | This option will run artisan command when "artisan app:refresh" run.
+    | Right after artisan down
     |
     */
-    'app_refresh_artisan_commands' => [
+    'app_refresh_artisan_commands_before' => [
         [
             'command' => 'view:clear',
             'message' => '- Compiled views cleared!'
@@ -69,6 +70,22 @@ return [
             'command' => 'cache:clear',
             'message' => '- Application cache cleared!'
         ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | App Refresh Artisan Command After
+    |--------------------------------------------------------------------------
+    |
+    | This option will run artisan command when "artisan app:refresh" run.
+    | Right before artisan up
+    |
+    */
+    'app_refresh_artisan_commands_after' => [
+        [
+            'command' => 'config:cache',
+            'message' => '- Configuration cached successfully!'
+        ]
     ],
 
     /*

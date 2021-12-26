@@ -48,7 +48,7 @@ class AppRefreshCommand extends Command
             (new Process(explode(' ', 'php artisan down')))->run();
             Log::channel('maintenance')->info('~~ Application is now in maintenance mode.');
 
-            foreach (tbtoolkitconfig('app_refresh_artisan_commands') as $key => $command) {
+            foreach (tbtoolkitconfig('app_refresh_artisan_commands_before') as $key => $command) {
                 Artisan::call($command['command']);
                 Log::channel('maintenance')->info($command['message']);
             }
@@ -61,12 +61,17 @@ class AppRefreshCommand extends Command
             $this->composer->dumpAutoloads();
             Log::channel('maintenance')->info('+ Composer successfully regenerate autoload.');
 
+            foreach (tbtoolkitconfig('app_refresh_artisan_commands_after') as $key => $command) {
+                Artisan::call($command['command']);
+                Log::channel('maintenance')->info($command['message']);
+            }
+
             (new Process(explode(' ', 'php artisan up')))->run();
             Log::channel('maintenance')->info('~~ Application is now live.');
 
             Log::channel('maintenance')->info('----> Maintenance server daily, success');
         } catch (\Throwable $th) {
-            Log::channel('maintenance')->info('----> Maintenance server daily, failed : ' . $th->getMessage());
+            Log::channel('maintenance')->info('----> Maintenance server daily, failed : ' . $th->getMessage() . $th->getLine());
         } finally {
             Log::channel('maintenance')->info('');
         }
