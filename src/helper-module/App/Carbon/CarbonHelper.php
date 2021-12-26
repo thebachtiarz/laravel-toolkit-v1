@@ -12,21 +12,23 @@ trait CarbonHelper
      * get full date time now
      * for human
      *
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function humanFullDateTimeNow(): string
+    public static function humanFullDateTimeNow($dateStart = ""): string
     {
-        return Carbon::now()->isoFormat(CarbonInterface::CARBON_FULL_HUMAN_DATE_FORMAT);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->isoFormat(CarbonInterface::CARBON_FULL_HUMAN_DATE_FORMAT);
     }
 
     /**
      * get date time now in timezone
      *
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbDateTimeNowTimezone(): string
+    public static function dbDateTimeNowTimezone($dateStart = ""): string
     {
-        return Carbon::now()->setTimezone(tbtoolkitconfig('app_timezone'));
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->setTimezone(tbtoolkitconfig('app_timezone'));
     }
 
     /**
@@ -105,105 +107,105 @@ trait CarbonHelper
     /**
      * get date time by specific add days from now
      * for database
-     * default = 30 days
      *
-     * @param integer $days
+     * @param integer $days default: 30 days
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddDays(int $days = 30): string
+    public static function dbGetFullDateAddDays(int $days = 30, $dateStart = ""): string
     {
-        return Carbon::now()->addDays($days);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addDays($days);
     }
 
     /**
      * get date time by specific add hours from now
      * for database
-     * default = 24 hours
      *
-     * @param integer $hours
+     * @param integer $hours default: 24 hours
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddHours(int $hours = 24): string
+    public static function dbGetFullDateAddHours(int $hours = 24, $dateStart = ""): string
     {
-        return Carbon::now()->addHours($hours);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addHours($hours);
     }
 
     /**
      * get date time by specific add minutes from now
      * for database
-     * default = 60 minutes
      *
-     * @param integer $minutes
+     * @param integer $minutes default: 60 minutes
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddMinutes(int $minutes = 60): string
+    public static function dbGetFullDateAddMinutes(int $minutes = 60, $dateStart = ""): string
     {
-        return Carbon::now()->addMinutes($minutes);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addMinutes($minutes);
     }
 
     /**
      * get date time by specific add seconds from now
      * for database
-     * default = 60 second
      *
-     * @param integer $seconds
+     * @param integer $seconds default: 60 seconds
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddSeconds(int $seconds = 60): string
+    public static function dbGetFullDateAddSeconds(int $seconds = 60, $dateStart = ""): string
     {
-        return Carbon::now()->addSeconds($seconds);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addSeconds($seconds);
     }
 
     /**
      * get date time by specific sub days from now
      * for database
-     * default = 30 days
      *
-     * @param integer $days
+     * @param integer $days default: 30 days
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubDays(int $days = 30): string
+    public static function dbGetFullDateSubDays(int $days = 30, $dateStart = ""): string
     {
-        return Carbon::now()->subDays($days);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subDays($days);
     }
 
     /**
      * get date time by specific sub hours from now
      * for database
-     * default = 24 hours
      *
-     * @param integer $hours
+     * @param integer $hours default: 24 hours
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubHours(int $hours = 24): string
+    public static function dbGetFullDateSubHours(int $hours = 24, $dateStart = ""): string
     {
-        return Carbon::now()->subHours($hours);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subHours($hours);
     }
 
     /**
      * get date time by specific sub minutes from now
      * for database
-     * default = 60 minutes
      *
-     * @param integer $minutes
+     * @param integer $minutes default: 60 minutes
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubMinutes(int $minutes = 60): string
+    public static function dbGetFullDateSubMinutes(int $minutes = 60, $dateStart = ""): string
     {
-        return Carbon::now()->subMinutes($minutes);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subMinutes($minutes);
     }
 
     /**
      * get date time by specific sub seconds from now
      * for database
-     * default = 60 second
      *
-     * @param integer $seconds
+     * @param integer $seconds default: 60 seconds
+     * @param datetime $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubSeconds(int $seconds = 60): string
+    public static function dbGetFullDateSubSeconds(int $seconds = 60, $dateStart = ""): string
     {
-        return Carbon::now()->subSeconds($seconds);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subSeconds($seconds);
     }
     // ? End of Date Format
 
