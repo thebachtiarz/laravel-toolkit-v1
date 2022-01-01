@@ -17,7 +17,9 @@ trait CarbonHelper
      */
     public static function humanFullDateTimeNow($dateStart = ""): string
     {
-        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->isoFormat(CarbonInterface::CARBON_FULL_HUMAN_DATE_FORMAT);
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))
+            ->setTimezone(tbtoolkitconfig('app_timezone'))
+            ->isoFormat(CarbonInterface::CARBON_FULL_HUMAN_DATE_FORMAT);
     }
 
     /**
@@ -36,7 +38,7 @@ trait CarbonHelper
      * for human
      *
      * @param datetime $datetime
-     * @param string $split
+     * @param string $split split only: date or time
      * @return string
      */
     public static function humanDateTime($datetime, string $split = ''): string
@@ -55,7 +57,7 @@ trait CarbonHelper
      * for database
      *
      * @param datetime $datetime
-     * @param string $split
+     * @param string $split split only: date or time
      * @return string
      */
     public static function dbDateTime($datetime, string $split = ''): string
@@ -102,6 +104,45 @@ trait CarbonHelper
     public static function humanIntervalDateTime($datetime): string
     {
         return Carbon::parse($datetime)->diffForHumans();
+    }
+
+    /**
+     * get date time by specific add years from now
+     * for database
+     *
+     * @param integer $years default: 1 year
+     * @param datetime $dateStart default: now()
+     * @return string
+     */
+    public static function dbGetFullDateAddYears(int $years = 1, $dateStart = ""): string
+    {
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addYears($years);
+    }
+
+    /**
+     * get date time by specific add months from now
+     * for database
+     *
+     * @param integer $months default: 6 months
+     * @param datetime $dateStart default: now()
+     * @return string
+     */
+    public static function dbGetFullDateAddMonths(int $months = 6, $dateStart = ""): string
+    {
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addMonths($months);
+    }
+
+    /**
+     * get date time by specific add weeks from now
+     * for database
+     *
+     * @param integer $weeks default: 1 week
+     * @param datetime $dateStart default: now()
+     * @return string
+     */
+    public static function dbGetFullDateAddWeeks(int $weeks = 1, $dateStart = ""): string
+    {
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addWeeks($weeks);
     }
 
     /**
@@ -154,6 +195,45 @@ trait CarbonHelper
     public static function dbGetFullDateAddSeconds(int $seconds = 60, $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addSeconds($seconds);
+    }
+
+    /**
+     * get date time by specific sub years from now
+     * for database
+     *
+     * @param integer $years default: 1 year
+     * @param datetime $dateStart default: now()
+     * @return string
+     */
+    public static function dbGetFullDateSubYears(int $years = 1, $dateStart = ""): string
+    {
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subYears($years);
+    }
+
+    /**
+     * get date time by specific sub months from now
+     * for database
+     *
+     * @param integer $months default: 6 months
+     * @param datetime $dateStart default: now()
+     * @return string
+     */
+    public static function dbGetFullDateSubMonths(int $months = 6, $dateStart = ""): string
+    {
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subMonths($months);
+    }
+
+    /**
+     * get date time by specific sub weeks from now
+     * for database
+     *
+     * @param integer $weeks default: 1 week
+     * @param datetime $dateStart default: now()
+     * @return string
+     */
+    public static function dbGetFullDateSubWeeks(int $weeks = 1, $dateStart = ""): string
+    {
+        return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subWeeks($weeks);
     }
 
     /**
