@@ -3,13 +3,11 @@
 namespace TheBachtiarz\Toolkit\Backend\Controllers\API;
 
 use Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\{Request, Response};
 use TheBachtiarz\Toolkit\Backend\Service\ConfigBackendService;
 use TheBachtiarz\Toolkit\Backend\Validator\AppRequestValidator;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Helper\App\Response\ResponseHelper;
-use TheBachtiarz\Toolkit\ToolkitInterface;
 
 class AppController extends Controller
 {
