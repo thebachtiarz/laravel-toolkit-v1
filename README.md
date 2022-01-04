@@ -24,8 +24,9 @@ composer require thebachtiarz/laravel-toolkit-v1
 
 - register the REST API into -> **app/Providers/RouteServiceProvider.php**
 ```bash
-Route::namespace($this->namespace)
+Route::prefix('thebachtiarz')
     ->middleware(['api'])
+    ->namespace($this->namespace)
     ->group(tbtoolkitrouteapi());
 ```
 
