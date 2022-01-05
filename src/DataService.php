@@ -29,6 +29,15 @@ class DataService
             'cache.default' => 'database'
         ];
 
+        // ! cors paths
+        $_paths = config('cors.paths');
+        $registerConfig[] = [
+            'cors.paths' => array_merge(
+                $_paths,
+                ['thebachtiarz/*']
+            )
+        ];
+
         // ! logging
         $logging = config('logging.channels');
         $registerConfig[] = [
