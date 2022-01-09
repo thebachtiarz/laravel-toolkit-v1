@@ -8,6 +8,25 @@ use TheBachtiarz\Toolkit\ToolkitInterface;
 trait ConfigHelper
 {
     /**
+     * update config file value
+     *
+     * @param string $key
+     * @param string $value
+     * @return boolean
+     */
+    private static function updateConfigFile(string $key, string $value): bool
+    {
+        return self::replaceToolkitConfigFile([
+            [
+                'key' => $key,
+                'old' => tbtoolkitconfig($key),
+                'new' => $value,
+                'tag_value' => '"'
+            ]
+        ]);
+    }
+
+    /**
      * replace [toolkit] config static value
      *
      * sample : [['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']]

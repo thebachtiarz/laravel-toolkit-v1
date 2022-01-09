@@ -2,8 +2,8 @@
 
 namespace TheBachtiarz\Toolkit\Backend\Controllers\API;
 
-use Controllers\Controller;
 use Illuminate\Http\{Request, Response};
+use TheBachtiarz\Toolkit\Backend\Controllers\Controller;
 use TheBachtiarz\Toolkit\Backend\Service\ConfigBackendService;
 use TheBachtiarz\Toolkit\Backend\Validator\AppRequestValidator;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
@@ -53,6 +53,21 @@ class AppController extends Controller
     {
         $config = ConfigBackendService::getAppTimezone()
             ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME)
+            ?? '';
+
+        return self::JsonResponse($config);
+    }
+
+    /**
+     * get app prefix
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function getAppPrefix(Request $request)
+    {
+        $config = ConfigBackendService::getAppPrefix()
+            ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_PREFIX_NAME)
             ?? '';
 
         return self::JsonResponse($config);
@@ -112,6 +127,25 @@ class AppController extends Controller
         if ($validator->fails()) return AppRequestValidator::responseError($validator);
 
         $config = ConfigBackendService::setAppTimezone($request->timezone);
+
+        return self::JsonResponse($config);
+    }
+
+    /**
+     * set app prefix
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function setAppPrefix(Request $request)
+    {
+        $validator = AppRequestValidator::validate($request, [
+            'prefix' => 'prefix-simple'
+        ]);
+
+        if ($validator->fails()) return AppRequestValidator::responseError($validator);
+
+        $config = ConfigBackendService::setAppPrefix($request->url);
 
         return self::JsonResponse($config);
     }

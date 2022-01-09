@@ -44,6 +44,16 @@ class ConfigBackendService
     }
 
     /**
+     * get config app prefix
+     *
+     * @return string|null
+     */
+    public static function getAppPrefix(): ?string
+    {
+        return self::getConfigValue(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_PREFIX_NAME);
+    }
+
+    /**
      * set config app name
      *
      * @param string $appName
@@ -52,18 +62,9 @@ class ConfigBackendService
     public static function setAppName(string $appName): ?string
     {
         try {
-            $setAppName = self::setConfigValue(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME, $appName);
+            $setAppNameData = self::setConfigDataTemplate(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME, $appName, "app name");
 
-            throw_if(!$setAppName, 'Exception', "Failed to set app name");
-
-            self::replaceToolkitConfigFile([
-                [
-                    'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME,
-                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
-                    'new' => $appName,
-                    'tag_value' => '"'
-                ]
-            ]);
+            throw_if(!$setAppNameData['status'], 'Exception', $setAppNameData['message']);
 
             return self::getAppName();
         } catch (\Throwable $th) {
@@ -81,18 +82,9 @@ class ConfigBackendService
     public static function setAppUrl(string $appUrl): ?string
     {
         try {
-            $setAppUrl = self::setConfigValue(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME, $appUrl);
+            $setAppUrlData = self::setConfigDataTemplate(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME, $appUrl, "app url");
 
-            throw_if(!$setAppUrl, 'Exception', "Failed to set app url");
-
-            self::replaceToolkitConfigFile([
-                [
-                    'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME,
-                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
-                    'new' => $appUrl,
-                    'tag_value' => '"'
-                ]
-            ]);
+            throw_if(!$setAppUrlData['status'], 'Exception', $setAppUrlData['message']);
 
             return self::getAppUrl();
         } catch (\Throwable $th) {
@@ -110,18 +102,9 @@ class ConfigBackendService
     public static function setAppTimezone(string $appTimezone): ?string
     {
         try {
-            $setAppTimezone = self::setConfigValue(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME, $appTimezone);
+            $setAppTimezoneData = self::setConfigDataTemplate(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME, $appTimezone, "app timezone");
 
-            throw_if(!$setAppTimezone, 'Exception', "Failed to set app timezone");
-
-            self::replaceToolkitConfigFile([
-                [
-                    'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME,
-                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
-                    'new' => $appTimezone,
-                    'tag_value' => '"'
-                ]
-            ]);
+            throw_if(!$setAppTimezoneData['status'], 'Exception', $setAppTimezoneData['message']);
 
             return self::getAppTimezone();
         } catch (\Throwable $th) {
@@ -130,7 +113,56 @@ class ConfigBackendService
         }
     }
 
+    /**
+     * set config app prefix
+     *
+     * @param string $appPrefix
+     * @return string|null
+     */
+    public static function setAppPrefix(string $appPrefix): ?string
+    {
+        try {
+            $setAppPrefixData = self::setConfigDataTemplate(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_PREFIX_NAME, $appPrefix, "app prefix");
+
+            throw_if(!$setAppPrefixData['status'], 'Exception', $setAppPrefixData['message']);
+
+            return self::getAppPrefix();
+        } catch (\Throwable $th) {
+            Log::channel('error')->error($th->getMessage());
+            return null;
+        }
+    }
+
     // ? Private Methods
+    /**
+     * config data template setter
+     *
+     * @param string $key
+     * @param string $value
+     * @param string $message
+     * @return array
+     */
+    private static function setConfigDataTemplate(string $key, string $value, string $message): array
+    {
+        $result = ['status' => false, 'message' => ''];
+
+        try {
+            $setConfigCache = self::setConfigValue($key, $value);
+
+            throw_if(!$setConfigCache, 'Exception', "Failed to set {$message}");
+
+            $updateConfigFile = self::updateConfigFile($key, $value);
+
+            throw_if(!$updateConfigFile, 'Exception', "Failed to update config {$message} file");
+
+            $result['status'] = true;
+        } catch (\Throwable $th) {
+            $result['message'] = $th->getMessage();
+        } finally {
+            return $result;
+        }
+    }
+
     /**
      * get config value
      *

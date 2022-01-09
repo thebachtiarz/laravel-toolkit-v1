@@ -11,4 +11,5 @@ interface AppRules
     public const RULES_REGEX_NAME_SIMPLE_MESSAGES = ":key cannot be accepted";
     public const RULES_REGEX_URL_SIMPLE_MESSAGES = ":key cannot be accepted";
     public const RULES_REGEX_TIMEZONE_SIMPLE_MESSAGES = ":key cannot be accepted";
+    public const RULES_REGEX_PREFIX_SIMPLE_MESSAGES = ":key cannot be accepted";
 }

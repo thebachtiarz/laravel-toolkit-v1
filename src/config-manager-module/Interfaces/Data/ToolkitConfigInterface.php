@@ -17,5 +17,6 @@ interface ToolkitConfigInterface
     public const TOOLKIT_CONFIG_APP_NAME_NAME = "app_name";
     public const TOOLKIT_CONFIG_APP_URL_NAME = "app_url";
     public const TOOLKIT_CONFIG_APP_TIMEZONE_NAME = "app_timezone";
+    public const TOOLKIT_CONFIG_APP_PREFIX_NAME = "app_prefix";
     public const TOOLKIT_CONFIG_APP_KEY_NAME = "app_key";
 }
