@@ -14,7 +14,7 @@ trait ConfigHelper
      * @param string $value
      * @return boolean
      */
-    private static function updateConfigFile(string $key, string $value): bool
+    public static function updateConfigFile(string $key, string $value): bool
     {
         return self::replaceToolkitConfigFile([
             [

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Config\Helper\ConfigHelper;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Service\ToolkitConfigService;
-use TheBachtiarz\Toolkit\ToolkitInterface;
 
 class ConfigBackendService
 {

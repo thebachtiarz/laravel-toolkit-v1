@@ -109,6 +109,8 @@ return [
     | make sure there is a method named "process" inside the class
     | otherwise will return an error message.
     |
+    | All classes must implements interface:
+    | "TheBachtiarz\Toolkit\Config\Interfaces\Class\ScheduleCacheInterface"
     |
     */
     'app_refresh_cache_classes' => []

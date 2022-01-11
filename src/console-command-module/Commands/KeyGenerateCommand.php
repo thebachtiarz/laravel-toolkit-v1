@@ -2,11 +2,8 @@
 
 namespace TheBachtiarz\Toolkit\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Console\ConfirmableTrait;
+use Illuminate\Console\{Command, ConfirmableTrait};
 use Illuminate\Support\Facades\Log;
-use TheBachtiarz\Toolkit\Cache\Base\Cache as CacheBase;
-use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
 use TheBachtiarz\Toolkit\Config\Helper\ConfigHelper;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Service\ToolkitConfigService;
@@ -30,37 +27,26 @@ class KeyGenerateCommand extends Command
      */
     protected $description = 'Toolkit: Set the application key';
 
-    public function __construct(
-        ApplicationService $applicationService
-    ) {
+    public function __construct()
+    {
         parent::__construct();
-        $this->applicationService = $applicationService;
     }
 
     public function handle(): void
     {
         try {
-            $newKey = $this->applicationService->generateBase64Key();
+            $newKey = ApplicationService::generateBase64Key();
 
-            if (CacheService::has(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)) {
-                $currentKey = CacheBase::appKey();
-
-                throw_if(((strlen($currentKey) !== 0) && (!$this->confirmToProceed())), 'Exception', "");
-            }
-
-            ToolkitConfigService::name(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
+            $updateConfigData = ToolkitConfigService::name(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
                 ->value($newKey)
                 ->accessGroup(ToolkitConfigInterface::TOOLKIT_CONFIG_PRIVATE_CODE)
                 ->set();
 
-            self::replaceToolkitConfigFile([
-                [
-                    'key' => ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME,
-                    'old' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME),
-                    'new' => $newKey,
-                    'tag_value' => '"'
-                ]
-            ]);
+            throw_if(!$updateConfigData, 'Exception', "Failed to update config app key data");
+
+            $updateConfigFile = self::updateConfigFile(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME, $newKey);
+
+            throw_if(!$updateConfigFile, 'Exception', "Failed to update config app key file");
 
             Log::channel('application')->debug("- Successfully set new application key");
 

@@ -21,7 +21,7 @@ class Cache
      * get cache by key
      *
      * @param string $cacheName
-     * @return mixed|null
+     * @return mixed
      */
     public static function get(string $cacheName)
     {
@@ -33,9 +33,9 @@ class Cache
      *
      * @param string $cacheName
      * @param mixed $value
-     * @return mixed|null
+     * @return boolean
      */
-    public static function set(string $cacheName, $value)
+    public static function set(string $cacheName, $value): bool
     {
         return LaravelCache::forever($cacheName, $value);
     }
@@ -46,9 +46,9 @@ class Cache
      * @param string $cacheName
      * @param mixed $value
      * @param integer $ttl timestamps
-     * @return mixed
+     * @return boolean
      */
-    public static function setTemporary(string $cacheName, $value, int $ttl)
+    public static function setTemporary(string $cacheName, $value, int $ttl): bool
     {
         return LaravelCache::add($cacheName, $value, $ttl);
     }

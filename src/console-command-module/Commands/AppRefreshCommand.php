@@ -4,9 +4,9 @@ namespace TheBachtiarz\Toolkit\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\{Artisan, Log};
 use Symfony\Component\Process\Process;
+use TheBachtiarz\Toolkit\Console\Service\ScheduleCacheProcessService;
 
 class AppRefreshCommand extends Command
 {
@@ -46,6 +46,7 @@ class AppRefreshCommand extends Command
             Log::channel('maintenance')->info('----> Maintenance server daily, started...');
 
             (new Process(explode(' ', 'php artisan down')))->run();
+
             Log::channel('maintenance')->info('~~ Application is now in maintenance mode.');
 
             foreach (tbtoolkitconfig('app_refresh_artisan_commands_before') as $key => $command) {
@@ -55,10 +56,10 @@ class AppRefreshCommand extends Command
 
             // any module who need caching is execute here...
             if (count(tbtoolkitconfig('app_refresh_cache_classes')))
-                foreach (tbtoolkitconfig('app_refresh_cache_classes') as $key => $class)
-                    $class::process();
+                ScheduleCacheProcessService::runSchedule();
 
             $this->composer->dumpAutoloads();
+
             Log::channel('maintenance')->info('+ Composer successfully regenerate autoload.');
 
             foreach (tbtoolkitconfig('app_refresh_artisan_commands_after') as $key => $command) {
@@ -67,6 +68,7 @@ class AppRefreshCommand extends Command
             }
 
             (new Process(explode(' ', 'php artisan up')))->run();
+
             Log::channel('maintenance')->info('~~ Application is now live.');
 
             Log::channel('maintenance')->info('----> Maintenance server daily, success');
