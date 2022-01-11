@@ -1,6 +1,6 @@
 <?php
 
-namespace TheBachtiarz\Toolkit\Config\Interfaces\Class;
+namespace TheBachtiarz\Toolkit\Config\Interfaces\Classes;
 
 interface ScheduleCacheInterface
 {
