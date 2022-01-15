@@ -170,7 +170,7 @@ class ConfigBackendService
      */
     private static function getConfigValue(string $configName)
     {
-        return ToolkitConfigService::name($configName)
+        return ToolkitConfigService::name(ToolkitConfigInterface::TOOLKIT_CONFIG_PREFIX_NAME . "/{$configName}")
             ->accessGroup(ToolkitConfigInterface::TOOLKIT_CONFIG_PRIVATE_CODE)
             ->get();
     }
@@ -184,7 +184,8 @@ class ConfigBackendService
      */
     private static function setConfigValue(string $configName, $configValue): ?bool
     {
-        return ToolkitConfigService::name($configName)->value($configValue)
+        return ToolkitConfigService::name(ToolkitConfigInterface::TOOLKIT_CONFIG_PREFIX_NAME . "/{$configName}")
+            ->value($configValue)
             ->accessGroup(ToolkitConfigInterface::TOOLKIT_CONFIG_PRIVATE_CODE)
             ->set();
     }

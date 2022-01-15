@@ -15,7 +15,7 @@ class AppRefreshCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'toolkit:app:refresh';
+    protected $signature = 'thebachtiarz:toolkit:app:refresh';
 
     /**
      * The console command description.
@@ -51,6 +51,7 @@ class AppRefreshCommand extends Command
 
             foreach (tbtoolkitconfig('app_refresh_artisan_commands_before') as $key => $command) {
                 Artisan::call($command['command']);
+
                 Log::channel('maintenance')->info($command['message']);
             }
 
@@ -64,6 +65,7 @@ class AppRefreshCommand extends Command
 
             foreach (tbtoolkitconfig('app_refresh_artisan_commands_after') as $key => $command) {
                 Artisan::call($command['command']);
+
                 Log::channel('maintenance')->info($command['message']);
             }
 
@@ -73,7 +75,7 @@ class AppRefreshCommand extends Command
 
             Log::channel('maintenance')->info('----> Maintenance server daily, success');
         } catch (\Throwable $th) {
-            Log::channel('maintenance')->info('----> Maintenance server daily, failed : ' . $th->getMessage() . $th->getLine());
+            Log::channel('maintenance')->warning('----> Maintenance server daily, failed : ' . $th->getMessage() . $th->getLine());
         } finally {
             Log::channel('maintenance')->info('');
         }

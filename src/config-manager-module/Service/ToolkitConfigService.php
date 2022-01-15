@@ -8,11 +8,40 @@ use TheBachtiarz\Toolkit\Config\Job\ToolkitConfigJob;
 
 class ToolkitConfigService
 {
-    private static string $name;
-    private static string $accessGroup = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE;
-    private static bool $isEnable = true;
-    private static bool $isEncrypt = false;
-    private static $value;
+    /**
+     * config name
+     *
+     * @var string
+     */
+    protected static string $name;
+
+    /**
+     * config access group
+     *
+     * @var string
+     */
+    protected static string $accessGroup = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE;
+
+    /**
+     * config is enable
+     *
+     * @var boolean
+     */
+    protected static bool $isEnable = true;
+
+    /**
+     * config is encrypt
+     *
+     * @var boolean
+     */
+    protected static bool $isEncrypt = false;
+
+    /**
+     * config value
+     *
+     * @var mixed
+     */
+    protected static $value;
 
     // ? Public Methods
     /**
@@ -108,9 +137,9 @@ class ToolkitConfigService
 
     // ? Setter Modules
     /**
-     * set name
+     * Set config name
      *
-     * @param string $name
+     * @param string $name config name
      * @return self
      */
     public static function name(string $name): self
@@ -121,9 +150,9 @@ class ToolkitConfigService
     }
 
     /**
-     * set access group
+     * Set config access group
      *
-     * @param string $accessGroup
+     * @param string $accessGroup config access group
      * @return self
      */
     public static function accessGroup(string $accessGroup): self
@@ -134,9 +163,9 @@ class ToolkitConfigService
     }
 
     /**
-     * set is enable
+     * Set config is enable
      *
-     * @param boolean $isEnable
+     * @param boolean $isEnable config is enable
      * @return self
      */
     public static function isEnable(bool $isEnable): self
@@ -147,9 +176,9 @@ class ToolkitConfigService
     }
 
     /**
-     * set is encrypted
+     * Set config is encrypt
      *
-     * @param boolean $isEncrypt
+     * @param boolean $isEncrypt config is encrypt
      * @return self
      */
     public static function isEncrypt(bool $isEncrypt): self
@@ -160,9 +189,9 @@ class ToolkitConfigService
     }
 
     /**
-     * set value
+     * Set config value
      *
-     * @param mixed $value
+     * @param mixed $value config value
      * @return self
      */
     public static function value($value): self

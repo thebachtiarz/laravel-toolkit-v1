@@ -46,20 +46,20 @@ class DataService
                 [
                     'application' => [
                         'driver' => 'single',
-                        'path' => base_path('toolkit_application.log')
+                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/application.log')
                     ],
                     'developer' => [
                         'driver' => 'single',
-                        'path' => base_path('toolkit_developer.log')
+                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/developer.log')
                     ],
                     'error' => [
                         'driver' => 'single',
                         'level' => 'debug',
-                        'path' => base_path('toolkit_error.log')
+                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/error.log')
                     ],
                     'maintenance' => [
                         'driver' => 'single',
-                        'path' => base_path('toolkit_maintenance.log')
+                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/maintenance.log')
                     ]
                 ]
             )

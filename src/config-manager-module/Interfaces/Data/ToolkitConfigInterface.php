@@ -4,6 +4,8 @@ namespace TheBachtiarz\Toolkit\Config\Interfaces\Data;
 
 interface ToolkitConfigInterface
 {
+    public const TOOLKIT_CONFIG_PREFIX_NAME = "toolkit";
+
     public const TOOLKIT_CONFIG_USER_GROUP_DATA = [
         SELF::TOOLKIT_CONFIG_PUBLIC_CODE => SELF::TOOLKIT_CONFIG_PUBLIC_NAME,
         SELF::TOOLKIT_CONFIG_PRIVATE_CODE => SELF::TOOLKIT_CONFIG_PRIVATE_NAME,

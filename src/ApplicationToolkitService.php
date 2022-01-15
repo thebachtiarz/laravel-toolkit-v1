@@ -2,8 +2,7 @@
 
 namespace TheBachtiarz\Toolkit;
 
-use TheBachtiarz\Toolkit\Console\Commands\AppRefreshCommand;
-use TheBachtiarz\Toolkit\Console\Commands\KeyGenerateCommand;
+use TheBachtiarz\Toolkit\Console\Commands\{AppRefreshCommand, KeyGenerateCommand};
 
 class ApplicationToolkitService
 {
@@ -24,6 +23,7 @@ class ApplicationToolkitService
     public function registerConfig(): bool
     {
         try {
+            $this->createDirectories();
             $this->setConfigs();
             return true;
         } catch (\Throwable $th) {
@@ -46,6 +46,17 @@ class ApplicationToolkitService
     }
 
     // ? Private Methods
+    /**
+     * create directories
+     *
+     * @return void
+     */
+    private function createDirectories(): void
+    {
+        if (!is_dir(base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH)))
+            mkdir(base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH), 0755);
+    }
+
     /**
      * set configs
      *

@@ -8,6 +8,15 @@ use TheBachtiarz\Toolkit\ToolkitInterface;
 trait ConfigHelper
 {
     /**
+     * config name.
+     * default: thebachtiarz_toolkit
+     *
+     * @var string
+     */
+    private static string $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME;
+
+    // ? Public Modules
+    /**
      * update config file value
      *
      * @param string $key
@@ -19,7 +28,7 @@ trait ConfigHelper
         return self::replaceToolkitConfigFile([
             [
                 'key' => $key,
-                'old' => tbtoolkitconfig($key),
+                'old' => config(self::$configName . ".{$key}"),
                 'new' => $value,
                 'tag_value' => '"'
             ]
@@ -27,7 +36,7 @@ trait ConfigHelper
     }
 
     /**
-     * replace [toolkit] config static value
+     * replace file config static value
      *
      * sample : [['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey, 'tag_value' => '"']]
      *
@@ -37,7 +46,7 @@ trait ConfigHelper
     public static function replaceToolkitConfigFile(array $replaces = []): bool
     {
         try {
-            $configPath = config_path(ToolkitInterface::TOOLKIT_CONFIG_NAME . '.php');
+            $configPath = config_path(self::$configName . ".php");
             $_isFileExist = file_exists($configPath);
             if ($_isFileExist) {
                 foreach ($replaces as $key => $replace) {
@@ -51,10 +60,28 @@ trait ConfigHelper
                     );
                 }
             }
+
             return true;
         } catch (\Throwable $th) {
             Log::channel('error')->error($th->getMessage());
+
             return false;
         }
+    }
+
+    // ? Private Modules
+
+    // ? Setter Modules
+    /**
+     * Set config name
+     *
+     * @param string $configName default: thebachtiarz_toolkit
+     * @return self
+     */
+    public static function setConfigName(string $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME): self
+    {
+        self::$configName = $configName;
+
+        return new self;
     }
 }
