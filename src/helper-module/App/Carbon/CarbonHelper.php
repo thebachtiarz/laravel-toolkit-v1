@@ -12,10 +12,10 @@ trait CarbonHelper
      * get full date time now
      * for human
      *
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function humanFullDateTimeNow($dateStart = ""): string
+    public static function humanFullDateTimeNow(string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))
             ->setTimezone(tbtoolkitconfig('app_timezone'))
@@ -25,10 +25,10 @@ trait CarbonHelper
     /**
      * get date time now in timezone
      *
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbDateTimeNowTimezone($dateStart = ""): string
+    public static function dbDateTimeNowTimezone(string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->setTimezone(tbtoolkitconfig('app_timezone'));
     }
@@ -37,11 +37,11 @@ trait CarbonHelper
      * parse date time
      * for human
      *
-     * @param datetime $datetime
+     * @param string $datetime
      * @param string $split split only: date or time
      * @return string
      */
-    public static function humanDateTime($datetime, string $split = ''): string
+    public static function humanDateTime(string $datetime, string $split = ''): string
     {
         $datetime = Carbon::parse($datetime);
 
@@ -56,11 +56,11 @@ trait CarbonHelper
      * parse date time
      * for database
      *
-     * @param datetime $datetime
+     * @param string $datetime
      * @param string $split split only: date or time
      * @return string
      */
-    public static function dbDateTime($datetime, string $split = ''): string
+    public static function dbDateTime(string $datetime, string $split = ''): string
     {
         $datetime = Carbon::parse($datetime);
 
@@ -74,11 +74,11 @@ trait CarbonHelper
     /**
      * get interval date created from date updated
      *
-     * @param datetime $date_created
-     * @param datetime $date_updated
+     * @param string $date_created
+     * @param string $date_updated
      * @return string
      */
-    public static function humanIntervalCreateUpdate($date_created, $date_updated): string
+    public static function humanIntervalCreateUpdate(string $date_created, string $date_updated): string
     {
         return self::anyConvDateToTimestamp($date_updated) > self::anyConvDateToTimestamp($date_created) ? self::humanIntervalDateTime($date_updated) : '-';
     }
@@ -86,22 +86,27 @@ trait CarbonHelper
     /**
      * convert date time to timestamp
      *
-     * @param datetime $datetime
+     * @param string $datetime default: now()
      * @return string
      */
-    public static function anyConvDateToTimestamp($datetime): string
+    public static function anyConvDateToTimestamp(string $datetime = "", bool $withMilli = false): string
     {
-        return Carbon::parse($datetime)->timestamp;
+        $_format = "U";
+
+        if ($withMilli)
+            $_format .= "u";
+
+        return Carbon::parse((iconv_strlen($datetime) ? $datetime : now()))->format($_format);
     }
 
     /**
      * convert date time to interval time from now
      * for Human
      *
-     * @param datetime $datetime
+     * @param string $datetime
      * @return string
      */
-    public static function humanIntervalDateTime($datetime): string
+    public static function humanIntervalDateTime(string $datetime): string
     {
         return Carbon::parse($datetime)->diffForHumans();
     }
@@ -111,10 +116,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $years default: 1 year
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddYears(int $years = 1, $dateStart = ""): string
+    public static function dbGetFullDateAddYears(int $years = 1, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addYears($years);
     }
@@ -124,10 +129,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $months default: 6 months
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddMonths(int $months = 6, $dateStart = ""): string
+    public static function dbGetFullDateAddMonths(int $months = 6, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addMonths($months);
     }
@@ -137,10 +142,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $weeks default: 1 week
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddWeeks(int $weeks = 1, $dateStart = ""): string
+    public static function dbGetFullDateAddWeeks(int $weeks = 1, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addWeeks($weeks);
     }
@@ -150,10 +155,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $days default: 30 days
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddDays(int $days = 30, $dateStart = ""): string
+    public static function dbGetFullDateAddDays(int $days = 30, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addDays($days);
     }
@@ -163,10 +168,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $hours default: 24 hours
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddHours(int $hours = 24, $dateStart = ""): string
+    public static function dbGetFullDateAddHours(int $hours = 24, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addHours($hours);
     }
@@ -176,10 +181,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $minutes default: 60 minutes
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddMinutes(int $minutes = 60, $dateStart = ""): string
+    public static function dbGetFullDateAddMinutes(int $minutes = 60, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addMinutes($minutes);
     }
@@ -189,10 +194,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $seconds default: 60 seconds
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateAddSeconds(int $seconds = 60, $dateStart = ""): string
+    public static function dbGetFullDateAddSeconds(int $seconds = 60, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->addSeconds($seconds);
     }
@@ -202,10 +207,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $years default: 1 year
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubYears(int $years = 1, $dateStart = ""): string
+    public static function dbGetFullDateSubYears(int $years = 1, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subYears($years);
     }
@@ -215,10 +220,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $months default: 6 months
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubMonths(int $months = 6, $dateStart = ""): string
+    public static function dbGetFullDateSubMonths(int $months = 6, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subMonths($months);
     }
@@ -228,10 +233,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $weeks default: 1 week
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubWeeks(int $weeks = 1, $dateStart = ""): string
+    public static function dbGetFullDateSubWeeks(int $weeks = 1, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subWeeks($weeks);
     }
@@ -241,10 +246,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $days default: 30 days
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubDays(int $days = 30, $dateStart = ""): string
+    public static function dbGetFullDateSubDays(int $days = 30, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subDays($days);
     }
@@ -254,10 +259,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $hours default: 24 hours
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubHours(int $hours = 24, $dateStart = ""): string
+    public static function dbGetFullDateSubHours(int $hours = 24, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subHours($hours);
     }
@@ -267,10 +272,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $minutes default: 60 minutes
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubMinutes(int $minutes = 60, $dateStart = ""): string
+    public static function dbGetFullDateSubMinutes(int $minutes = 60, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subMinutes($minutes);
     }
@@ -280,10 +285,10 @@ trait CarbonHelper
      * for database
      *
      * @param integer $seconds default: 60 seconds
-     * @param datetime $dateStart default: now()
+     * @param string $dateStart default: now()
      * @return string
      */
-    public static function dbGetFullDateSubSeconds(int $seconds = 60, $dateStart = ""): string
+    public static function dbGetFullDateSubSeconds(int $seconds = 60, string $dateStart = ""): string
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subSeconds($seconds);
     }
@@ -293,10 +298,10 @@ trait CarbonHelper
     /**
      * convert date time to person age
      *
-     * @param datetime $datetime
+     * @param string $datetime
      * @return string
      */
-    public static function humanGetPersonAge($datetime): string
+    public static function humanGetPersonAge(string $datetime): string
     {
         return Carbon::parse($datetime)->age;
     }
@@ -304,10 +309,10 @@ trait CarbonHelper
     /**
      * convert date time to person born date full
      *
-     * @param datetime $datetime
+     * @param string $datetime
      * @return array
      */
-    public static function humanGetPersonBornDateFull($datetime): array
+    public static function humanGetPersonBornDateFull(string $datetime): array
     {
         $born = Carbon::parse($datetime);
 
@@ -321,10 +326,10 @@ trait CarbonHelper
     /**
      * check is person birthday today
      *
-     * @param datetime $datetime
+     * @param string $datetime
      * @return boolean
      */
-    public static function isPersonBirthdayToday($datetime): bool
+    public static function isPersonBirthdayToday(string $datetime): bool
     {
         $born = Carbon::parse($datetime);
 
