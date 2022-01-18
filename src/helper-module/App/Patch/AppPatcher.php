@@ -11,7 +11,7 @@ trait AppPatcher
      *
      * @return void
      */
-    public static function factoryNamespaceResolver()
+    private static function factoryNamespaceResolver()
     {
         Factory::guessFactoryNamesUsing(function (string $modelName) {
             $modelUse = str_replace('Models\\', '', $modelName);

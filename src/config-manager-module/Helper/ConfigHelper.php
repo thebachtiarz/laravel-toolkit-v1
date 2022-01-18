@@ -15,7 +15,6 @@ trait ConfigHelper
      */
     private static string $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME;
 
-    // ? Public Modules
     /**
      * update config file value
      *
@@ -23,7 +22,7 @@ trait ConfigHelper
      * @param string $value
      * @return boolean
      */
-    public static function updateConfigFile(string $key, string $value): bool
+    private static function updateConfigFile(string $key, string $value): bool
     {
         return self::replaceToolkitConfigFile([
             [
@@ -43,7 +42,7 @@ trait ConfigHelper
      * @param array $replaces
      * @return boolean
      */
-    public static function replaceToolkitConfigFile(array $replaces = []): bool
+    private static function replaceToolkitConfigFile(array $replaces = []): bool
     {
         try {
             $configPath = config_path(self::$configName . ".php");
@@ -69,8 +68,6 @@ trait ConfigHelper
         }
     }
 
-    // ? Private Modules
-
     // ? Setter Modules
     /**
      * Set config name
@@ -78,7 +75,7 @@ trait ConfigHelper
      * @param string $configName default: thebachtiarz_toolkit
      * @return self
      */
-    public static function setConfigName(string $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME): self
+    private static function setConfigName(string $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME): self
     {
         self::$configName = $configName;
 

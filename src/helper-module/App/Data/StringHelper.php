@@ -15,7 +15,7 @@ trait StringHelper
      * @param boolean $withLowerCase set true for adding lower case
      * @return string
      */
-    public static function shuffleString(int $count, bool $withLowerCase = false): string
+    private static function shuffleString(int $count, bool $withLowerCase = false): string
     {
         $theStr = "QWEASDZXCRTYFGHVBNUIOJKLMP";
 
@@ -34,7 +34,7 @@ trait StringHelper
      * @param integer $count
      * @return string
      */
-    public static function shuffleNumber(int $count): string
+    private static function shuffleNumber(int $count): string
     {
         $theNum = (string) mt_rand(1000000000, 9999999999);
 

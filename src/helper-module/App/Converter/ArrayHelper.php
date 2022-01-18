@@ -11,7 +11,7 @@ trait ArrayHelper
      * @param string $objectKey
      * @return array
      */
-    public static function collectionToSingle(array $arrayData, string $objectKey): array
+    private static function collectionToSingle(array $arrayData, string $objectKey): array
     {
         $_newCollection = [];
 
@@ -27,7 +27,7 @@ trait ArrayHelper
      * @param array $data
      * @return string
      */
-    public static function jsonEncode(array $data): string
+    private static function jsonEncode(array $data): string
     {
         return json_encode($data);
     }
@@ -39,7 +39,7 @@ trait ArrayHelper
      * @param boolean $associative
      * @return array
      */
-    public static function jsonDecode(string $data, $associative = true): array
+    private static function jsonDecode(string $data, $associative = true): array
     {
         return json_decode($data, $associative);
     }
@@ -50,7 +50,7 @@ trait ArrayHelper
      * @param mixed $value
      * @return string|null
      */
-    public static function serialize($value): ?string
+    private static function serialize($value): ?string
     {
         return serialize($value);
     }
@@ -61,7 +61,7 @@ trait ArrayHelper
      * @param string $value
      * @return mixed|null
      */
-    public static function unserialize(string $value)
+    private static function unserialize(string $value)
     {
         return unserialize($value);
     }

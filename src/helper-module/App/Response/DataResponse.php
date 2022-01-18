@@ -9,7 +9,6 @@ trait DataResponse
 {
     use ResponseHelper;
 
-    // ? Public Method
     /**
      * create response data
      *
@@ -18,7 +17,7 @@ trait DataResponse
      * @param integer $resCode
      * @return array
      */
-    public static function responseData($data, string $message = '', int $resCode = 200): array
+    private static function responseData($data, string $message = '', int $resCode = 200): array
     {
         return [
             'status' => (bool) true,
@@ -34,7 +33,7 @@ trait DataResponse
      * @param \Throwable $throwable
      * @return array
      */
-    public static function responseError(\Throwable $throwable): array
+    private static function responseError(\Throwable $throwable): array
     {
         return [
             'status' => (bool) false,
@@ -48,7 +47,7 @@ trait DataResponse
      * @param array $response
      * @return object
      */
-    public static function responseApiRest(array $response): object
+    private static function responseApiRest(array $response): object
     {
         try {
             throw_if(!$response['status'], 'Exception', '');
@@ -65,7 +64,7 @@ trait DataResponse
      * @param array $response
      * @return array
      */
-    public static function responseApiGraphql(array $response): array
+    private static function responseApiGraphql(array $response): array
     {
         try {
             throw_if(!$response['status'], 'Exception', '');
@@ -76,7 +75,6 @@ trait DataResponse
         }
     }
 
-    // ? Private Method
     /**
      * data response json
      *

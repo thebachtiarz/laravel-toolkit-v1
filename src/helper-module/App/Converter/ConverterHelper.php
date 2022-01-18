@@ -14,7 +14,7 @@ trait ConverterHelper
      * @param boolean $decimal
      * @return string
      */
-    public static function setRupiah(?string $balance, bool $decimal = false): string
+    private static function setRupiah(?string $balance, bool $decimal = false): string
     {
         $_balance = $balance ?? '0';
 
@@ -28,7 +28,7 @@ trait ConverterHelper
      * @param string $logType
      * @return string
      */
-    public static function humanLogTypeName(string $logType): string
+    private static function humanLogTypeName(string $logType): string
     {
         $replace = Str::of($logType)->replace('_', ' ');
 
