@@ -3,7 +3,7 @@
     "description": "A Tool-Kit for Laravel Project v1",
     "type": "library",
     "license": "MIT",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "keywords": [
         "laravel",
         "thebachtiarz",
@@ -21,7 +21,8 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "laravel/framework": "^8.12"
+        "laravel/framework": "^8.12",
+        "nesbot/carbon": "^2.50"
     },
     "autoload": {
         "psr-4": {

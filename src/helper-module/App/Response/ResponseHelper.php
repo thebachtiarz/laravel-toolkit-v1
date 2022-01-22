@@ -8,7 +8,7 @@ trait ResponseHelper
 {
     use CarbonHelper;
 
-    public static string $error403 = "Sorry, you don't have access here";
+    private static string $error403 = "Sorry, you don't have access here";
 
     /**
      * response resources with data
@@ -19,7 +19,7 @@ trait ResponseHelper
      * @param string $time
      * @return array
      */
-    public static function dataResponse($response_data, string $stat = '', string $message = '', string $time = ''): array
+    private static function dataResponse($response_data, string $stat = '', string $message = '', string $time = ''): array
     {
         return [
             'status' => $stat ? $stat : 'success',
@@ -39,7 +39,7 @@ trait ResponseHelper
      * @param string $time
      * @return object
      */
-    public static function JsonResponse($response_data, string $message = '', int $httpRes = 200, string $status = '', string $time = ''): object
+    private static function JsonResponse($response_data, string $message = '', int $httpRes = 200, string $status = '', string $time = ''): object
     {
         $response = self::dataResponse($response_data, $status, $message, $time);
 
@@ -52,7 +52,7 @@ trait ResponseHelper
      * @param string $message
      * @return array
      */
-    public static function errorResponse($message): array
+    private static function errorResponse($message): array
     {
         return ['status' => 'error', 'message' => $message];
     }
@@ -64,7 +64,7 @@ trait ResponseHelper
      * @param string $code
      * @return object
      */
-    public static function _throwErrorResponse(string $message = '', string $code = ''): object
+    private static function _throwErrorResponse(string $message = '', string $code = ''): object
     {
         $setMsg = $message ? $message : self::$error403;
         $setCode = $code ? $code : "403";

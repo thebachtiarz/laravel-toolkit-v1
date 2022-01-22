@@ -9,6 +9,17 @@ trait CarbonHelper
 {
     // ? Date Format
     /**
+     * init new self carbon.
+     * for customize the carbon it self.
+     *
+     * @return Carbon
+     */
+    private static function Carbon(): Carbon
+    {
+        return new Carbon;
+    }
+
+    /**
      * get full date time now
      * for human
      *
@@ -37,11 +48,11 @@ trait CarbonHelper
      * parse date time
      * for human
      *
-     * @param string $datetime
+     * @param string $datetime default: now()
      * @param string $split split only: date or time
      * @return string
      */
-    private static function humanDateTime(string $datetime, string $split = ''): string
+    private static function humanDateTime(string $datetime = "", string $split = ''): string
     {
         $datetime = Carbon::parse($datetime);
 
@@ -56,11 +67,11 @@ trait CarbonHelper
      * parse date time
      * for database
      *
-     * @param string $datetime
+     * @param string $datetime default: now()
      * @param string $split split only: date or time
      * @return string
      */
-    private static function dbDateTime(string $datetime, string $split = ''): string
+    private static function dbDateTime(string $datetime = "", string $split = ''): string
     {
         $datetime = Carbon::parse($datetime);
 
@@ -100,10 +111,24 @@ trait CarbonHelper
     }
 
     /**
+     * convert timestamp to date time
+     *
+     * @param string $timestamp default: now()
+     * @return string
+     */
+    private static function dbTimestampToDateTime(string $timestamp = ""): string
+    {
+        if (iconv_strlen($timestamp))
+            return Carbon::createFromFormat('U', $timestamp)->format(CarbonInterface::CARBON_DB_SIMPLE_DATE_FORMAT);
+        else
+            return self::dbDateTime();
+    }
+
+    /**
      * convert date time to interval time from now
      * for Human
      *
-     * @param string $datetime
+     * @param string $datetime date from_
      * @return string
      */
     private static function humanIntervalDateTime(string $datetime): string
@@ -298,7 +323,7 @@ trait CarbonHelper
     /**
      * convert date time to person age
      *
-     * @param string $datetime
+     * @param string $datetime human date of birth
      * @return string
      */
     private static function humanGetPersonAge(string $datetime): string
@@ -309,7 +334,7 @@ trait CarbonHelper
     /**
      * convert date time to person born date full
      *
-     * @param string $datetime
+     * @param string $datetime human date of birth
      * @return array
      */
     private static function humanGetPersonBornDateFull(string $datetime): array
@@ -326,7 +351,7 @@ trait CarbonHelper
     /**
      * check is person birthday today
      *
-     * @param string $datetime
+     * @param string $datetime human date of birth
      * @return boolean
      */
     private static function isPersonBirthdayToday(string $datetime): bool
