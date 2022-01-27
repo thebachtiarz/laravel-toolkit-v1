@@ -18,6 +18,19 @@ function tbtoolkitconfig(?string $keyName = null)
 }
 
 /**
+ * get location from thebachtiarz directory
+ *
+ * @param string|null $subDir
+ * @return string
+ */
+function tbdirlocation(?string $subDir = null): string
+{
+    $_subDir = $subDir ? "/{$subDir}" : "";
+
+    return base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH) . $_subDir;
+}
+
+/**
  * thebachtiarz toolkit route api file location
  *
  * @return string

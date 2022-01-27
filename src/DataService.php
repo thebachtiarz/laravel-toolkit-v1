@@ -34,7 +34,7 @@ class DataService
         $registerConfig[] = [
             'cors.paths' => array_merge(
                 $_paths,
-                ['thebachtiarz/*']
+                [tbtoolkitconfig('app_prefix') . '/*']
             )
         ];
 
@@ -46,20 +46,20 @@ class DataService
                 [
                     'application' => [
                         'driver' => 'single',
-                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/application.log')
+                        'path' => tbdirlocation("log/application.log")
                     ],
                     'developer' => [
                         'driver' => 'single',
-                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/developer.log')
+                        'path' => tbdirlocation("log/developer.log")
                     ],
                     'error' => [
                         'driver' => 'single',
                         'level' => 'debug',
-                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/error.log')
+                        'path' => tbdirlocation("log/error.log")
                     ],
                     'maintenance' => [
                         'driver' => 'single',
-                        'path' => base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH . '/log/maintenance.log')
+                        'path' => tbdirlocation("log/maintenance.log")
                     ]
                 ]
             )

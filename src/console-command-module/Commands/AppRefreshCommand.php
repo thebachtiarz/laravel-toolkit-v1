@@ -40,8 +40,10 @@ class AppRefreshCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
+        $result = 0;
+
         try {
             Log::channel('maintenance')->info('----> Maintenance server daily, started...');
 
@@ -74,10 +76,14 @@ class AppRefreshCommand extends Command
             Log::channel('maintenance')->info('~~ Application is now live.');
 
             Log::channel('maintenance')->info('----> Maintenance server daily, success');
+
+            $result = 1;
         } catch (\Throwable $th) {
-            Log::channel('maintenance')->warning('----> Maintenance server daily, failed : ' . $th->getMessage() . $th->getLine());
+            Log::channel('maintenance')->warning("----> Maintenance server daily, failed : {$th->getMessage()}, Line: {$th->getLine()}");
         } finally {
             Log::channel('maintenance')->info('');
+
+            return $result;
         }
     }
 }

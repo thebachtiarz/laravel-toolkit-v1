@@ -2,7 +2,7 @@
 
 namespace TheBachtiarz\Toolkit;
 
-use TheBachtiarz\Toolkit\Console\Commands\{AppRefreshCommand, KeyGenerateCommand};
+use TheBachtiarz\Toolkit\Console\Commands\{AppRefreshCommand, DatabaseBackupCommand, KeyGenerateCommand, LoggerBackupCommand};
 
 class ApplicationToolkitService
 {
@@ -11,7 +11,9 @@ class ApplicationToolkitService
      */
     public const COMMANDS = [
         AppRefreshCommand::class,
-        KeyGenerateCommand::class
+        DatabaseBackupCommand::class,
+        KeyGenerateCommand::class,
+        LoggerBackupCommand::class
     ];
 
     // ? Public Methods
@@ -53,8 +55,14 @@ class ApplicationToolkitService
      */
     private function createDirectories(): void
     {
-        if (!is_dir(base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH)))
-            mkdir(base_path(ToolkitInterface::TOOLKIT_DIRECTORY_PATH), 0755);
+        if (!is_dir(tbdirlocation()))
+            mkdir(tbdirlocation(), 0755);
+
+        if (!is_dir(tbdirlocation("backup/log")))
+            mkdir(tbdirlocation("backup/log"), 0755, true);
+
+        if (!is_dir(tbdirlocation("backup/database")))
+            mkdir(tbdirlocation("backup/database"), 0755, true);
     }
 
     /**
