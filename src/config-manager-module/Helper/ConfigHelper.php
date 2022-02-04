@@ -2,11 +2,13 @@
 
 namespace TheBachtiarz\Toolkit\Config\Helper;
 
-use Illuminate\Support\Facades\Log;
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 use TheBachtiarz\Toolkit\ToolkitInterface;
 
 trait ConfigHelper
 {
+    use ErrorLogTrait;
+
     /**
      * config name.
      * default: thebachtiarz_toolkit
@@ -62,7 +64,7 @@ trait ConfigHelper
 
             return true;
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
 
             return false;
         }

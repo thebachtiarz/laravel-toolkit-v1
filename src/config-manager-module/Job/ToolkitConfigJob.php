@@ -2,14 +2,14 @@
 
 namespace TheBachtiarz\Toolkit\Config\Job;
 
-use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Model\ToolkitConfig;
 use TheBachtiarz\Toolkit\Helper\App\Converter\ArrayHelper;
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 class ToolkitConfigJob
 {
-    use ArrayHelper;
+    use ArrayHelper, ErrorLogTrait;
 
     // ? Public Methods
     /**
@@ -18,7 +18,7 @@ class ToolkitConfigJob
      * @param string $name
      * @param boolean $is_enable
      * @param string $access_group
-     * @return mixed|null
+     * @return mixed
      */
     public static function get(
         string $name,
@@ -28,9 +28,11 @@ class ToolkitConfigJob
         try {
             $config = self::getConfigData($name, $is_enable, $access_group);
             throw_if(!$config, 'Exception', "config not found");
+
             return self::unserializeConfig($config->value, $config->is_encrypt);
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -58,7 +60,8 @@ class ToolkitConfigJob
                 $access_group
             );
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -77,7 +80,8 @@ class ToolkitConfigJob
         try {
             return self::deleteConfigData($name, $access_group);
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -103,7 +107,8 @@ class ToolkitConfigJob
                 ['access_group', $access_group]
             ])->first();
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -129,7 +134,8 @@ class ToolkitConfigJob
                 ['is_encrypt' => $is_encrypt, 'value' => $value]
             );
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -151,7 +157,8 @@ class ToolkitConfigJob
                 'access_group' => $access_group
             ])->delete();
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return false;
         }
     }
@@ -171,7 +178,8 @@ class ToolkitConfigJob
 
             return self::serialize($value);
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -181,7 +189,7 @@ class ToolkitConfigJob
      *
      * @param string $value
      * @param boolean $is_encrypt
-     * @return mixed|null
+     * @return mixed
      */
     private static function unserializeConfig(string $value, bool $is_encrypt = false)
     {
@@ -193,7 +201,8 @@ class ToolkitConfigJob
 
             return $config;
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }

@@ -4,9 +4,12 @@ namespace TheBachtiarz\Toolkit\Console\Service;
 
 use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Config\Interfaces\Classes\ScheduleCacheInterface;
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 class ScheduleCacheProcessService
 {
+    use ErrorLogTrait;
+
     /**
      * run cache process on config schedule
      *
@@ -27,7 +30,7 @@ class ScheduleCacheProcessService
 
             return true;
         } catch (\Throwable $th) {
-            Log::channel('error')->warning($th->getMessage());
+            self::logCatch($th);
 
             return false;
         }

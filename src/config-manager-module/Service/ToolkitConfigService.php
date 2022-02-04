@@ -2,12 +2,14 @@
 
 namespace TheBachtiarz\Toolkit\Config\Service;
 
-use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Job\ToolkitConfigJob;
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 class ToolkitConfigService
 {
+    use ErrorLogTrait;
+
     /**
      * config name
      *
@@ -51,7 +53,7 @@ class ToolkitConfigService
      *
      * ? extra: isEnable, accessGroup
      *
-     * @return mixed|null
+     * @return mixed
      */
     public static function get()
     {
@@ -62,7 +64,8 @@ class ToolkitConfigService
                 ])
             );
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -85,7 +88,8 @@ class ToolkitConfigService
                 ])
             );
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return false;
         }
     }
@@ -108,7 +112,8 @@ class ToolkitConfigService
                 ])
             );
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return false;
         }
     }
@@ -130,7 +135,8 @@ class ToolkitConfigService
 
             return $args;
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }

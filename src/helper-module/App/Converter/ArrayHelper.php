@@ -10,6 +10,7 @@ trait ArrayHelper
      * @param array $arrayData
      * @param string $objectKey
      * @return array
+     * @deprecated 1.1.7 use getValuesCollections() instead
      */
     private static function collectionToSingle(array $arrayData, string $objectKey): array
     {
@@ -22,24 +23,45 @@ trait ArrayHelper
     }
 
     /**
-     * encode array to string
+     * get value only from collection(s).
      *
-     * @param array $data
+     * @param mixed $collections
+     * @param string $objectKey
+     * @return array|null
+     */
+    private static function getValuesCollections($collections, string $objectKey): ?array
+    {
+        try {
+            $_result = [];
+
+            foreach ($collections as $key => $object)
+                $_result[] = $object[$objectKey];
+
+            return $_result;
+        } catch (\Throwable $th) {
+            return null;
+        }
+    }
+
+    /**
+     * encode data to string (json)
+     *
+     * @param mixed $data
      * @return string
      */
-    private static function jsonEncode(array $data): string
+    private static function jsonEncode($data): string
     {
         return json_encode($data);
     }
 
     /**
-     * decode string to array associative
+     * decode string to origin data
      *
      * @param string $data
      * @param boolean $associative
-     * @return array
+     * @return mixed
      */
-    private static function jsonDecode(string $data, $associative = true): array
+    private static function jsonDecode(string $data, $associative = true)
     {
         return json_decode($data, $associative);
     }
@@ -59,7 +81,7 @@ trait ArrayHelper
      * convert to original data
      *
      * @param string $value
-     * @return mixed|null
+     * @return mixed
      */
     private static function unserialize(string $value)
     {

@@ -2,14 +2,14 @@
 
 namespace TheBachtiarz\Toolkit\Backend\Service;
 
-use Illuminate\Support\Facades\Log;
 use TheBachtiarz\Toolkit\Config\Helper\ConfigHelper;
 use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 use TheBachtiarz\Toolkit\Config\Service\ToolkitConfigService;
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 class ConfigBackendService
 {
-    use ConfigHelper;
+    use ConfigHelper, ErrorLogTrait;
 
     // ? Public Methods
     /**
@@ -67,7 +67,8 @@ class ConfigBackendService
 
             return self::getAppName();
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -87,7 +88,8 @@ class ConfigBackendService
 
             return self::getAppUrl();
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -107,7 +109,8 @@ class ConfigBackendService
 
             return self::getAppTimezone();
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -127,7 +130,8 @@ class ConfigBackendService
 
             return self::getAppPrefix();
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return null;
         }
     }
@@ -166,7 +170,7 @@ class ConfigBackendService
      * get config value
      *
      * @param string $configName
-     * @return mixed|null
+     * @return mixed
      */
     private static function getConfigValue(string $configName)
     {

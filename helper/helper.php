@@ -6,7 +6,7 @@ use TheBachtiarz\Toolkit\ToolkitInterface;
  * thebachtiarz toolkit config
  *
  * @param string|null $keyName config key name | null will return all
- * @return mixed|null
+ * @return mixed
  */
 function tbtoolkitconfig(?string $keyName = null)
 {

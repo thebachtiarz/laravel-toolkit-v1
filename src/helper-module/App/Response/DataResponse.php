@@ -2,12 +2,14 @@
 
 namespace TheBachtiarz\Toolkit\Helper\App\Response;
 
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
+
 /**
  * Response data service resolver
  */
 trait DataResponse
 {
-    use ResponseHelper;
+    use ResponseHelper, ErrorLogTrait;
 
     /**
      * create response data
@@ -111,6 +113,8 @@ trait DataResponse
      */
     private static function responseErrorJson(\Throwable $throwable): object
     {
+        self::logCatch($throwable);
+
         return self::JsonResponse(
             [
                 'code' => $throwable->getCode(),
@@ -131,6 +135,8 @@ trait DataResponse
      */
     private static function responseErrorGraphql(\Throwable $throwable): array
     {
+        self::logCatch($throwable);
+
         return self::dataResponse(
             [],
             'error',
