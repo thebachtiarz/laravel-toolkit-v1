@@ -3,15 +3,15 @@
 namespace TheBachtiarz\Toolkit\Backend\Validator;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator as ValidatorReturn;
 use TheBachtiarz\Toolkit\Backend\Interfaces\Rules\Rules;
+use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 use TheBachtiarz\Toolkit\Helper\App\Response\ResponseHelper;
 
 class AppRequestValidator
 {
-    use ResponseHelper;
+    use ResponseHelper, ErrorLogTrait;
 
     private static object $request;
     private static array $validates;
@@ -64,7 +64,8 @@ class AppRequestValidator
 
             return $result;
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return [];
         }
     }
@@ -84,7 +85,8 @@ class AppRequestValidator
 
             return array_merge(...$result);
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return [];
         }
     }
@@ -104,7 +106,8 @@ class AppRequestValidator
 
             return $result;
         } catch (\Throwable $th) {
-            Log::channel('error')->error($th->getMessage());
+            self::logCatch($th);
+
             return [];
         }
     }
