@@ -22,6 +22,16 @@ composer config repositories.thebachtiarz/laravel-toolkit-v1 git git@github.com:
 composer require thebachtiarz/laravel-toolkit-v1
 ```
 
+- vendor publish
+``` bash
+php artisan vendor:publish --provider="TheBachtiarz\Toolkit\ToolkitServiceProvider"
+```
+
+- database migration
+``` bash
+php artisan migrate
+```
+
 - register the REST API into -> **app/Providers/RouteServiceProvider.php**
 ```bash
 Route::prefix(tbtoolkitconfig('app_prefix'))
