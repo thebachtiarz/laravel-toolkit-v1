@@ -9,7 +9,7 @@ use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 class ConfigBackendService
 {
-    use ConfigHelper, ErrorLogTrait;
+    use ErrorLogTrait;
 
     // ? Public Methods
     /**
@@ -154,7 +154,7 @@ class ConfigBackendService
 
             throw_if(!$setConfigCache, 'Exception', "Failed to set {$message}");
 
-            $updateConfigFile = self::updateConfigFile($key, $value);
+            $updateConfigFile = ConfigHelper::updateConfigFile($key, $value);
 
             throw_if(!$updateConfigFile, 'Exception', "Failed to update config {$message} file");
 

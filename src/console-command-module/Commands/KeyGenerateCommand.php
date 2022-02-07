@@ -11,7 +11,7 @@ use TheBachtiarz\Toolkit\Console\Service\ApplicationService;
 
 class KeyGenerateCommand extends Command
 {
-    use ConfirmableTrait, ConfigHelper;
+    use ConfirmableTrait;
 
     /**
      * The name and signature of the console command.
@@ -54,6 +54,8 @@ class KeyGenerateCommand extends Command
                 $this->updateAppKeyConfig($proposedKey);
             }
         } catch (\Throwable $th) {
+            $this->warn('Application Key has been declared, use --force to change it.');
+
             $proposedKey = $currentKey;
         }
 
@@ -89,7 +91,7 @@ class KeyGenerateCommand extends Command
      */
     private function updateAppKeyConfig(string $proposedKey): void
     {
-        $updateConfigFile = self::updateConfigFile(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME, $proposedKey);
+        $updateConfigFile = ConfigHelper::updateConfigFile(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME, $proposedKey);
 
         throw_if(!$updateConfigFile, 'Exception', "Failed to update config app key file");
     }
