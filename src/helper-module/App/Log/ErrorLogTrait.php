@@ -4,6 +4,7 @@ namespace TheBachtiarz\Toolkit\Helper\App\Log;
 
 use Illuminate\Support\Facades\Log;
 use Psr\Log\LogLevel;
+use TheBachtiarz\Toolkit\Helper\App\Converter\ArrayHelper;
 use TheBachtiarz\Toolkit\Helper\App\Interfaces\LogLevelInterface;
 
 /**
@@ -11,6 +12,8 @@ use TheBachtiarz\Toolkit\Helper\App\Interfaces\LogLevelInterface;
  */
 trait ErrorLogTrait
 {
+    use ArrayHelper;
+
     /**
      * log error from throwable object value.
      * only execute not in production mode.
@@ -25,9 +28,11 @@ trait ErrorLogTrait
         if (in_array(config('app.env'), tbtoolkitconfig('logger_mode'))) {
             $logLevel = in_array($logLevel, LogLevelInterface::LOG_LEVEL_AVAILABLE) ? $logLevel : LogLevel::ERROR;
 
+            $_trace = $throwable->getTrace();
+
             $_logData = json_encode([
-                'file' => $throwable->getFile(),
-                'line' => $throwable->getLine(),
+                'file' => $_trace[0]['file'],
+                'line' => $_trace[0]['line'],
                 'message' => $throwable->getMessage(),
                 'code' => $throwable->getCode(),
             ]);
