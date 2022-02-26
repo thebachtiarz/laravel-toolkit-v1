@@ -49,7 +49,7 @@ trait DataResponse
      * @param array $response
      * @return object
      */
-    private static function responseApiRest(array $response): object
+    public static function responseApiRest(array $response): object
     {
         try {
             throw_if(!$response['status'], 'Exception', '');
@@ -115,14 +115,12 @@ trait DataResponse
     {
         self::logCatch($throwable);
 
+        $_errorData = self::getErrorData($throwable);
+
         return self::JsonResponse(
-            [
-                'code' => $throwable->getCode(),
-                'message' => $throwable->getMessage(),
-                'line' => config('app.debug') ? $throwable->getLine() : '', // for debug
-            ],
-            strlen($throwable->getMessage()) < 100 ? $throwable->getMessage() : 'Some error happen',
-            $throwable->getCode() ? $throwable->getCode() : 202,
+            $_errorData,
+            $_errorData['message'],
+            $throwable->getCode() ?: 202,
             'error'
         );
     }
@@ -137,10 +135,34 @@ trait DataResponse
     {
         self::logCatch($throwable);
 
+        $_errorData = self::getErrorData($throwable);
+
         return self::dataResponse(
-            [],
+            $_errorData,
             'error',
-            strlen($throwable->getMessage()) < 100 ? $throwable->getMessage() : 'Some error happen'
+            $_errorData['message']
         );
+    }
+
+    /**
+     * get error data
+     *
+     * @param \Throwable $throwable
+     * @return array
+     */
+    private static function getErrorData(\Throwable $throwable): array
+    {
+        $_result['message'] = config('app.env') === "production"
+            ? ((iconv_strlen($throwable->getMessage()) >= 100)
+                ? "Some error happen"
+                : $throwable->getMessage())
+            : $throwable->getMessage();
+
+        if (config('app.env') !== "production") {
+            $_result['code'] = $throwable->getCode();
+            $_result['line'] = $throwable->getLine();
+        }
+
+        return $_result;
     }
 }
