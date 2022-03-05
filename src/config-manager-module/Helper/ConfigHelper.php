@@ -41,7 +41,7 @@ class ConfigHelper
      * @param mixed $value
      * @return boolean
      */
-    public static function updateConfigFile(string $key, $value = null): bool
+    public static function updateConfigFile(string $key, mixed $value = null): bool
     {
         return self::replaceToolkitConfigFile([
             [
@@ -98,7 +98,7 @@ class ConfigHelper
      * @param mixed $value
      * @return mixed
      */
-    private static function valueResolver($value)
+    private static function valueResolver(mixed $value)
     {
         $result = null;
 

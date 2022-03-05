@@ -23,7 +23,7 @@ class Cache
      * @param string $cacheName
      * @return mixed
      */
-    public static function get(string $cacheName)
+    public static function get(string $cacheName): mixed
     {
         return LaravelCache::get($cacheName);
     }
@@ -35,7 +35,7 @@ class Cache
      * @param mixed $value
      * @return boolean
      */
-    public static function set(string $cacheName, $value): bool
+    public static function set(string $cacheName, mixed $value): bool
     {
         return LaravelCache::forever($cacheName, $value);
     }
@@ -45,12 +45,12 @@ class Cache
      *
      * @param string $cacheName
      * @param mixed $value
-     * @param integer $ttl timestamps
+     * @param \DateTimeInterface|\DateInterval|int $ttl default: 60 seconds
      * @return boolean
      */
-    public static function setTemporary(string $cacheName, $value, int $ttl): bool
+    public static function setTemporary(string $cacheName, $value, \DateTimeInterface|\DateInterval|int $ttl = 60): bool
     {
-        return LaravelCache::add($cacheName, $value, $ttl);
+        return LaravelCache::put($cacheName, $value, $ttl);
     }
 
     /**

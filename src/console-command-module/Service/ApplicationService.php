@@ -11,7 +11,7 @@ class ApplicationService
      *
      * @return string
      */
-    public static function generateBase64Key()
+    public static function generateBase64Key(): string
     {
         return 'base64:' . base64_encode(
             Encrypter::generateKey(config('app.cipher'))

@@ -43,7 +43,7 @@ class ToolkitConfigService
      *
      * @var mixed
      */
-    protected static $value;
+    protected static mixed $value;
 
     // ? Public Methods
     /**
@@ -55,7 +55,7 @@ class ToolkitConfigService
      *
      * @return mixed
      */
-    public static function get()
+    public static function get(): mixed
     {
         try {
             return ToolkitConfigJob::get(

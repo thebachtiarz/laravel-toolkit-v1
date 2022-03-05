@@ -19,8 +19,11 @@ trait DataResponse
      * @param integer $resCode
      * @return array
      */
-    private static function responseData($data, string $message = '', int $resCode = 200): array
-    {
+    private static function responseData(
+        mixed $data,
+        string $message = "",
+        int $resCode = 200
+    ): array {
         return [
             'status' => (bool) true,
             'data' => $data,
@@ -49,7 +52,7 @@ trait DataResponse
      * @param array $response
      * @return object
      */
-    public static function responseApiRest(array $response): object
+    private static function responseApiRest(array $response): object
     {
         try {
             throw_if(!$response['status'], 'Exception', '');
@@ -87,8 +90,13 @@ trait DataResponse
      * @param string $resTime
      * @return object
      */
-    private static function responseDataJson($data, string $message = '', int $resCode = 200, string $resStatus = '', string $resTime = ''): object
-    {
+    private static function responseDataJson(
+        mixed $data,
+        string $message = "",
+        int $resCode = 200,
+        string $resStatus = "",
+        string $resTime = ""
+    ): object {
         return self::JsonResponse($data, $message, $resCode, $resStatus, $resTime);
     }
 
@@ -100,7 +108,7 @@ trait DataResponse
      * @param string $resStatus
      * @return array
      */
-    private static function responseDataGraphql($data, string $message = '', string $resStatus = ''): array
+    private static function responseDataGraphql($data, string $message = "", string $resStatus = ""): array
     {
         return self::dataResponse($data, $resStatus, $message);
     }

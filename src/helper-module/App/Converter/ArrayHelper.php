@@ -29,7 +29,7 @@ trait ArrayHelper
      * @param string $objectKey
      * @return array|null
      */
-    private static function getValuesCollections($collections, string $objectKey): ?array
+    private static function getValuesCollections(mixed $collections, string $objectKey): ?array
     {
         try {
             $_result = [];
@@ -49,7 +49,7 @@ trait ArrayHelper
      * @param mixed $data
      * @return string
      */
-    private static function jsonEncode($data): string
+    private static function jsonEncode(mixed $data): string
     {
         return json_encode($data);
     }
@@ -72,7 +72,7 @@ trait ArrayHelper
      * @param mixed $value
      * @return string|null
      */
-    private static function serialize($value): ?string
+    private static function serialize(mixed $value): ?string
     {
         return serialize($value);
     }

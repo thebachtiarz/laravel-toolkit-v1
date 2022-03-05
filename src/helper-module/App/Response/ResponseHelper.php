@@ -19,8 +19,12 @@ trait ResponseHelper
      * @param string $time
      * @return array
      */
-    private static function dataResponse($response_data, string $stat = '', string $message = '', string $time = ''): array
-    {
+    private static function dataResponse(
+        mixed $response_data,
+        string $stat = "",
+        string $message = "",
+        string $time = ""
+    ): array {
         return [
             'status' => $stat ? $stat : 'success',
             'access' => $time ? $time : self::humanFullDateTimeNow(),
@@ -39,8 +43,13 @@ trait ResponseHelper
      * @param string $time
      * @return object
      */
-    private static function JsonResponse($response_data, string $message = '', int $httpRes = 200, string $status = '', string $time = ''): object
-    {
+    private static function JsonResponse(
+        mixed $response_data,
+        string $message = "",
+        int $httpRes = 200,
+        string $status = "",
+        string $time = ""
+    ): object {
         $response = self::dataResponse($response_data, $status, $message, $time);
 
         return response()->json($response, $httpRes);
@@ -52,7 +61,7 @@ trait ResponseHelper
      * @param string $message
      * @return array
      */
-    private static function errorResponse($message): array
+    private static function errorResponse(string $message): array
     {
         return ['status' => 'error', 'message' => $message];
     }
@@ -64,7 +73,7 @@ trait ResponseHelper
      * @param string $code
      * @return object
      */
-    private static function _throwErrorResponse(string $message = '', string $code = ''): object
+    private static function _throwErrorResponse(string $message = "", string $code = ""): object
     {
         $setMsg = $message ? $message : self::$error403;
         $setCode = $code ? $code : "403";
