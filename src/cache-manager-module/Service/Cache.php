@@ -48,7 +48,7 @@ class Cache
      * @param \DateTimeInterface|\DateInterval|int $ttl default: 60 seconds
      * @return boolean
      */
-    public static function setTemporary(string $cacheName, $value, \DateTimeInterface|\DateInterval|int $ttl = 60): bool
+    public static function setTemporary(string $cacheName, mixed $value, \DateTimeInterface|\DateInterval|int $ttl = 60): bool
     {
         return LaravelCache::put($cacheName, $value, $ttl);
     }

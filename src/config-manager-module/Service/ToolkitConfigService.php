@@ -200,7 +200,7 @@ class ToolkitConfigService
      * @param mixed $value config value
      * @return self
      */
-    public static function value($value): self
+    public static function value(mixed $value): self
     {
         self::$value = $value;
 
