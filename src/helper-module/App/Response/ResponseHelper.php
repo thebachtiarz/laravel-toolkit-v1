@@ -14,21 +14,21 @@ trait ResponseHelper
      * response resources with data
      *
      * @param mixed $response_data
-     * @param string $stat
+     * @param string $status
      * @param string $message
-     * @param string $time
+     * @param string $datetime
      * @return array
      */
     private static function dataResponse(
         mixed $response_data,
-        string $stat = "",
+        string $status = "",
         string $message = "",
-        string $time = ""
+        string $datetime = ""
     ): array {
         return [
-            'status' => $stat ? $stat : 'success',
-            'access' => $time ? $time : self::humanFullDateTimeNow(),
-            'message' => $message ? $message : '',
+            'status' => $status ?: 'success',
+            'access' => $datetime ?: self::humanFullDateTimeNow(),
+            'message' => $message,
             'response_data' => $response_data
         ];
     }

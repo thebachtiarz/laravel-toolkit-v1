@@ -19,7 +19,7 @@ trait EncryptorHelper
      * @param mixed $data
      * @return string|null
      */
-    public static function simpleEncrypt(mixed $data): ?string
+    private static function simpleEncrypt(mixed $data): ?string
     {
         try {
             return Crypt::encrypt([
@@ -40,7 +40,7 @@ trait EncryptorHelper
      * @param string $data
      * @return mixed
      */
-    public static function decrypt(string $data): mixed
+    private static function decrypt(string $data): mixed
     {
         try {
             $_result = Crypt::decrypt($data);

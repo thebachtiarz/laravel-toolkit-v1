@@ -2,6 +2,8 @@
 
 namespace TheBachtiarz\Toolkit\Helper\Model;
 
+use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
+
 /**
  * Model Job Paginate Trait
  */
@@ -10,18 +12,18 @@ trait ModelJobPaginateTrait
     //
 
     /**
-     * finance list paginate page
+     * list paginate page
      *
-     * @var integer
+     * @var integer|null
      */
-    protected static int $paginatePage = 1;
+    protected static ?int $paginatePage = 1;
 
     /**
-     * finance list paginate per page
+     * list paginate per page
      *
-     * @var integer
+     * @var integer|null
      */
-    protected static int $paginatePerPage = 10;
+    protected static ?int $paginatePerPage = 10;
 
     // ? Public Methods
 
@@ -38,7 +40,10 @@ trait ModelJobPaginateTrait
         try {
             throw_if(!class_exists($class), 'Exception', sprintf("Class %s not exist", $class));
 
-            return $class::simplePaginate(perPage: self::$paginatePerPage, page: self::$paginatePage);
+            return $class::simplePaginate(
+                perPage: PaginateCache::getPaginatePerPage() ?: self::$paginatePerPage,
+                page: PaginateCache::getPaginatePage() ?: self::$paginatePage
+            );
         } catch (\Throwable $th) {
             throw $th;
         }

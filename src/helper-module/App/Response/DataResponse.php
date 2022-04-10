@@ -47,6 +47,33 @@ trait DataResponse
     }
 
     /**
+     * convert response service to response web page
+     *
+     * @param array $response
+     * @return array
+     */
+    private static function responseWebPage(array $response): array
+    {
+        $result = ['status' => false, 'data' => null, 'message' => '', 'http_code' => 200];
+
+        try {
+            throw_if(!$response['status'], 'Exception', '');
+
+            $result['data'] = $response['data'];
+            $result['status'] = true;
+            $result['message'] = @$response['message'] ?: '';
+        } catch (\Throwable $th) {
+            $_th = self::getErrorData($response['throwable']);
+
+            $result['message'] = @$_th['message'] ?: $th->getMessage();
+        } finally {
+            $result['http_code'] = @$response['http_code'] ?: 200;
+
+            return $result;
+        }
+    }
+
+    /**
      * convert response service to response rest api
      *
      * @param array $response
