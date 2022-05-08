@@ -32,8 +32,10 @@ class PaginateCache
     public static function reset(): bool
     {
         try {
+            Cache::delete(PaginateInterface::PAGINATE_CONDITION_NAME);
             Cache::delete(self::$paginatePageName);
             Cache::delete(self::$paginatePerPageName);
+            Cache::delete(PaginateInterface::PAGINATE_SUMMARY_INFO_NAME);
 
             return true;
         } catch (\Throwable $th) {
@@ -42,6 +44,16 @@ class PaginateCache
     }
 
     // ?  Setter Module
+    /**
+     * check paginate condition
+     *
+     * @return boolean
+     */
+    public static function isPaginateActive(): bool
+    {
+        return Cache::get(PaginateInterface::PAGINATE_CONDITION_NAME) ?? false;
+    }
+
     /**
      * Get page paginate cache
      *
@@ -60,6 +72,28 @@ class PaginateCache
     public static function getPaginatePerPage(): mixed
     {
         return Cache::get(self::$paginatePerPageName);
+    }
+
+    /**
+     * Get paginate summary info
+     *
+     * @return mixed
+     */
+    public static function getPaginateSummaryInfo(): mixed
+    {
+        return Cache::get(PaginateInterface::PAGINATE_SUMMARY_INFO_NAME);
+    }
+
+    /**
+     * Set paginate condition to active
+     *
+     * @return self
+     */
+    public static function activatePaginate(): self
+    {
+        Cache::setTemporary(PaginateInterface::PAGINATE_CONDITION_NAME, true);
+
+        return new self;
     }
 
     /**
@@ -84,6 +118,19 @@ class PaginateCache
     public static function setPaginatePerPage(mixed $paginatePerPage = null): self
     {
         Cache::setTemporary(self::$paginatePerPageName, $paginatePerPage);
+
+        return new self;
+    }
+
+    /**
+     * Set paginate summary info
+     *
+     * @param array $paginateSummaryInfo
+     * @return self
+     */
+    public static function setPaginateSummaryInfo(array $paginateSummaryInfo): self
+    {
+        Cache::setTemporary(PaginateInterface::PAGINATE_SUMMARY_INFO_NAME, $paginateSummaryInfo);
 
         return new self;
     }

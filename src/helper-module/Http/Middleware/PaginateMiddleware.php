@@ -18,7 +18,7 @@ class PaginateMiddleware
     public function handle(Request $request, Closure $next)
     {
         if ($request->has('page') || $request->has('perpage'))
-            PaginateCache::setPaginatePerPage($request->get('perpage'))->setPaginatePage($request->get('page'));
+            PaginateCache::activatePaginate()->setPaginatePerPage($request->get('perpage'))->setPaginatePage($request->get('page'));
         else
             PaginateCache::reset();
 

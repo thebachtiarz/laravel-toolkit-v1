@@ -41,13 +41,50 @@ trait ModelJobPaginateTrait
         try {
             throw_if(!class_exists($class), 'Exception', sprintf("Class %s not exist", $class));
 
-            return $class::simplePaginate(
+            PaginateCache::activatePaginate();
+
+            $_result = $class::paginate(
                 perPage: PaginateCache::getPaginatePerPage() ?: self::$paginatePerPage,
                 page: PaginateCache::getPaginatePage() ?: self::$paginatePage
             );
+
+            self::addPaginateSummary($_result);
+
+            return $_result;
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    /**
+     * add paginate summary information
+     *
+     * @param array|object $paginate
+     * @return array
+     */
+    private static function addPaginateSummary(array|object $paginate): array
+    {
+        if (gettype($paginate) === 'object') {
+            $_paginateData = $paginate->toArray();
+
+            $_summary = [
+                'paginate' => [
+                    'current_data_from' => (string) $_paginateData['from'],
+                    'current_data_to' => (string) $_paginateData['to'],
+                    'current_page' => (string) $_paginateData['current_page'],
+                    'first_page' => (string) '1',
+                    'last_page' => (string) $_paginateData['last_page'],
+                    'per_page' => (string) $_paginateData['per_page'],
+                    'data_total' => (string) $_paginateData['total']
+                ]
+            ];
+        } else {
+            $_summary = $paginate;
+        }
+
+        PaginateCache::setPaginateSummaryInfo($_summary);
+
+        return $_summary;
     }
 
     // ? Setter Modules

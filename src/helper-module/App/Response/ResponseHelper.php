@@ -2,10 +2,8 @@
 
 namespace TheBachtiarz\Toolkit\Helper\App\Response;
 
-use TheBachtiarz\Toolkit\Cache\Service\Cache;
 use TheBachtiarz\Toolkit\Helper\App\Carbon\CarbonHelper;
 use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
-use TheBachtiarz\Toolkit\Helper\Interfaces\Data\PaginateInterface;
 
 trait ResponseHelper
 {
@@ -90,7 +88,7 @@ trait ResponseHelper
     /**
      * add paginate information if exist
      *
-     * @param array $initData
+     * @param array $initData original data without paginate information
      * @return array
      */
     private static function addPaginateInformation(array $initData): array
@@ -99,19 +97,10 @@ trait ResponseHelper
             /**
              * set data paginate information
              */
-            if (
-                Cache::has(PaginateInterface::PAGINATE_PARAMS_PAGE_NAME) ||
-                Cache::has(PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PERPAGE)
-            ) {
+            if (PaginateCache::isPaginateActive()) {
                 $initData = array_merge(
                     $initData,
-                    [
-                        'paginate' => [
-                            'status' => true,
-                            'perpage_count' => PaginateCache::getPaginatePerPage() ?: (string) PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PERPAGE,
-                            'current_page' => PaginateCache::getPaginatePage() ?: (string) PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PAGE
-                        ]
-                    ]
+                    PaginateCache::getPaginateSummaryInfo()
                 );
             }
         } catch (\Throwable $th) {
