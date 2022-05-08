@@ -317,6 +317,19 @@ trait CarbonHelper
     {
         return Carbon::parse((iconv_strlen($dateStart) ? $dateStart : now()))->subSeconds($seconds);
     }
+
+    /**
+     * check is date given is equal with format given
+     *
+     * @param string $date
+     * @param string $format
+     * @return boolean
+     */
+    private static function isFormatEqual(string $date, string $format): bool
+    {
+        return Carbon::hasFormat($date, $format);
+    }
+
     // ? End of Date Format
 
     // ? Person

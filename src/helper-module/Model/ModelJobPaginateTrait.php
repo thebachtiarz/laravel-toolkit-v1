@@ -3,6 +3,7 @@
 namespace TheBachtiarz\Toolkit\Helper\Model;
 
 use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
+use TheBachtiarz\Toolkit\Helper\Interfaces\Data\PaginateInterface;
 
 /**
  * Model Job Paginate Trait
@@ -16,14 +17,14 @@ trait ModelJobPaginateTrait
      *
      * @var integer|null
      */
-    protected static ?int $paginatePage = 1;
+    protected static ?int $paginatePage = PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PAGE;
 
     /**
      * list paginate per page
      *
      * @var integer|null
      */
-    protected static ?int $paginatePerPage = 10;
+    protected static ?int $paginatePerPage = PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PERPAGE;
 
     // ? Public Methods
 

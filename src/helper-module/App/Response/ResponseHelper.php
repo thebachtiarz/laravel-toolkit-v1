@@ -2,7 +2,10 @@
 
 namespace TheBachtiarz\Toolkit\Helper\App\Response;
 
+use TheBachtiarz\Toolkit\Cache\Service\Cache;
 use TheBachtiarz\Toolkit\Helper\App\Carbon\CarbonHelper;
+use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
+use TheBachtiarz\Toolkit\Helper\Interfaces\Data\PaginateInterface;
 
 trait ResponseHelper
 {
@@ -25,12 +28,16 @@ trait ResponseHelper
         string $message = "",
         string $datetime = ""
     ): array {
-        return [
+        $_responses = [
             'status' => $status ?: 'success',
             'access' => $datetime ?: self::humanFullDateTimeNow(),
             'message' => $message,
             'response_data' => $response_data
         ];
+
+        $_responses = self::addPaginateInformation($_responses);
+
+        return $_responses;
     }
 
     /**
@@ -78,5 +85,38 @@ trait ResponseHelper
         $setMsg = $message ? $message : self::$error403;
         $setCode = $code ? $code : "403";
         return response()->json(self::errorResponse($setMsg), $setCode);
+    }
+
+    /**
+     * add paginate information if exist
+     *
+     * @param array $initData
+     * @return array
+     */
+    private static function addPaginateInformation(array $initData): array
+    {
+        try {
+            /**
+             * set data paginate information
+             */
+            if (
+                Cache::has(PaginateInterface::PAGINATE_PARAMS_PAGE_NAME) ||
+                Cache::has(PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PERPAGE)
+            ) {
+                $initData = array_merge(
+                    $initData,
+                    [
+                        'paginate' => [
+                            'status' => true,
+                            'perpage_count' => PaginateCache::getPaginatePerPage() ?: (string) PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PERPAGE,
+                            'current_page' => PaginateCache::getPaginatePage() ?: (string) PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PAGE
+                        ]
+                    ]
+                );
+            }
+        } catch (\Throwable $th) {
+        } finally {
+            return $initData;
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace TheBachtiarz\Toolkit\Helper\Cache;
 
 use TheBachtiarz\Toolkit\Cache\Service\Cache;
+use TheBachtiarz\Toolkit\Helper\Interfaces\Data\PaginateInterface;
 
 class PaginateCache
 {
@@ -13,14 +14,14 @@ class PaginateCache
      *
      * @var string
      */
-    private static string $paginatePageName = '__paginatePage';
+    private static string $paginatePageName = PaginateInterface::PAGINATE_PARAMS_PAGE_NAME;
 
     /**
      * paginate per page cache name
      *
      * @var string
      */
-    private static string $paginatePerPageName = '__paginatePerPage';
+    private static string $paginatePerPageName = PaginateInterface::PAGINATE_PARAMS_PERPAGE_NAME;
 
     // ? Public method
     /**
