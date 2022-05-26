@@ -5,66 +5,76 @@ use TheBachtiarz\Toolkit\Backend\Controllers\API\AppController;
 
 /**
  * route toolkit group
- * route :: base_url/thebachtiarz/toolkit/---
+ * route :: base_url/{{app_prefix}}/toolkit/---
  */
 Route::prefix('toolkit')->group(function () {
+
     /**
      * route config group
-     * route :: base_url/thebachtiarz/toolkit/config/---
+     * route :: base_url/{{app_prefix}}/toolkit/config/---
      */
     Route::prefix('config')->group(function () {
 
         /**
          * route for authorized only
          */
-        Route::middleware('auth:sanctum')->group(function () {
+        Route::middleware('auth:sanctum')->controller(AppController::class)->group(function () {
+
             /**
              * route for get app name
-             * route :: base_url/thebachtiarz/toolkit/config/app-name
+             * method :: GET
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-name
              */
-            Route::get('app-name', [AppController::class, 'getAppName']);
+            Route::get('app-name', 'getAppName');
 
             /**
              * route for get app url
-             * route :: base_url/thebachtiarz/toolkit/config/app-url
+             * method :: GET
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-url
              */
-            Route::get('app-url', [AppController::class, 'getAppUrl']);
+            Route::get('app-url', 'getAppUrl');
 
             /**
              * route for get app timezone
-             * route :: base_url/thebachtiarz/toolkit/config/app-timezone
+             * method :: GET
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-timezone
              */
-            Route::get('app-timezone', [AppController::class, 'getAppTimezone']);
+            Route::get('app-timezone', 'getAppTimezone');
 
             /**
              * route for get app prefix
-             * route :: base_url/thebachtiarz/toolkit/config/app-prefix
+             * method :: GET
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-prefix
              */
-            Route::get('app-prefix', [AppController::class, 'getAppPrefix']);
+            Route::get('app-prefix', 'getAppPrefix');
 
             /**
              * route for set app name
-             * route :: base_url/thebachtiarz/toolkit/config/app-name
+             * method :: POST
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-name
              */
-            Route::post('app-name', [AppController::class, 'setAppName']);
+            Route::post('app-name', 'setAppName');
 
             /**
              * route for set app url
-             * route :: base_url/thebachtiarz/toolkit/config/app-url
+             * method :: POST
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-url
              */
-            Route::post('app-url', [AppController::class, 'setAppUrl']);
+            Route::post('app-url', 'setAppUrl');
 
             /**
              * route for set app timezone
-             * route :: base_url/thebachtiarz/toolkit/config/app-timezone
+             * method :: POST
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-timezone
              */
-            Route::post('app-timezone', [AppController::class, 'setAppTimezone']);
+            Route::post('app-timezone', 'setAppTimezone');
 
             /**
              * route for set app prefix
-             * route :: base_url/thebachtiarz/toolkit/config/app-prefix
+             * method :: POST
+             * route :: base_url/{{app_prefix}}/toolkit/config/app-prefix
              */
-            Route::post('app-prefix', [AppController::class, 'setAppPrefix']);
+            Route::post('app-prefix', 'setAppPrefix');
         });
     });
 });

@@ -3,7 +3,7 @@
 namespace TheBachtiarz\Toolkit\Helper\Curl;
 
 use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\{Http as CURL};
+use Illuminate\Support\Facades\Http as CURL;
 use TheBachtiarz\Toolkit\Helper\App\Converter\ArrayHelper;
 use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 

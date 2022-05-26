@@ -10,6 +10,9 @@
 > - Toolkit Backend Service
 
 -------
+## Requires
+- [laravel/framework](https://github.com/laravel/framework/) v9.x
+- [nesbot/carbon](https://github.com/nesbot/carbon/) ^v2.50
 
 ## Installation
 - composer config (only if you have access)
@@ -19,11 +22,7 @@ composer config repositories.thebachtiarz/laravel-toolkit-v1 git git@github.com:
 
 - install repository
 ```bash
-Laravel 9:
-composer require thebachtiarz/laravel-toolkit-v1:^2.0
-
-Laravel 8:
-composer require thebachtiarz/laravel-toolkit-v1:^1.1
+composer require thebachtiarz/laravel-toolkit-v1
 ```
 
 - vendor publish

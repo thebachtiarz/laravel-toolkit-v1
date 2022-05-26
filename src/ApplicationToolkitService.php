@@ -2,18 +2,16 @@
 
 namespace TheBachtiarz\Toolkit;
 
-use TheBachtiarz\Toolkit\Console\Commands\{AppRefreshCommand, DatabaseBackupCommand, KeyGenerateCommand, LoggerBackupCommand};
-
 class ApplicationToolkitService
 {
     /**
      * list of commands from toolkit modules
      */
     public const COMMANDS = [
-        AppRefreshCommand::class,
-        DatabaseBackupCommand::class,
-        KeyGenerateCommand::class,
-        LoggerBackupCommand::class
+        \TheBachtiarz\Toolkit\Console\Commands\AppRefreshCommand::class,
+        \TheBachtiarz\Toolkit\Console\Commands\DatabaseBackupCommand::class,
+        \TheBachtiarz\Toolkit\Console\Commands\KeyGenerateCommand::class,
+        \TheBachtiarz\Toolkit\Console\Commands\LoggerBackupCommand::class
     ];
 
     // ? Public Methods

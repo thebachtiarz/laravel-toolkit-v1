@@ -48,7 +48,7 @@ class DatabaseBackupCommand extends Command
 
             Log::channel('maintenance')->info('~~ Application is now in maintenance mode.');
 
-            $this->databaseBackupResolver();
+            $this->databaseBackupProcess();
 
             (new Process(explode(' ', 'php artisan up')))->run();
 
@@ -71,7 +71,7 @@ class DatabaseBackupCommand extends Command
      *
      * @return boolean
      */
-    private function databaseBackupResolver(): bool
+    private function databaseBackupProcess(): bool
     {
         $result = false;
 
@@ -94,7 +94,7 @@ class DatabaseBackupCommand extends Command
                     $_dbBackupFileName = "{$_dbCredentials['database']}_backup_" . date("ymd_His");
 
                     $_dbBackupCommand = sprintf(
-                        'mysqldump -h %s -P %s -u %s -p\'%s\' %s > %s',
+                        "mysqldump -h %s -P %s -u %s -p'%s' %s > %s",
                         $_dbCredentials['host'],
                         $_dbCredentials['port'],
                         $_dbCredentials['username'],
@@ -114,9 +114,9 @@ class DatabaseBackupCommand extends Command
 
             Log::channel('maintenance')->info("Successfully backup database $_dbBackupFileName.sql.");
 
-            (new Process(explode(' ', "zip -r backup/database/$_dbBackupFileName.zip $_dbBackupFileName.sql"), tbdirlocation()))->run();
+            (new Process(explode(' ', "zip -r thebachtiarz/backup/database/$_dbBackupFileName.zip $_dbBackupFileName.sql"), tbdirlocation()))->run();
 
-            Log::channel('maintenance')->info("Successfully compress database backup/database/$_dbBackupFileName.zip.");
+            Log::channel('maintenance')->info("Successfully compress database thebachtiarz/backup/database/$_dbBackupFileName.zip.");
 
             (new Process(explode(' ', "rm $_dbBackupFileName.sql"), tbdirlocation()))->run();
 

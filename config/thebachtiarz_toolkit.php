@@ -55,7 +55,10 @@ return [
     | Application Prefix
     |--------------------------------------------------------------------------
     |
-    | Here your application prefix are stored.
+    | Here your application url subfolder prefix are stored.
+    | Where you have library who requires this library.
+    |
+    | ex: {{domain}}/{{thebachtiarz}}/---
     |
     | ! this config is mutable !
     |
