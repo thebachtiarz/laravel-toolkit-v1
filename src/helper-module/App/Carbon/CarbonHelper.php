@@ -9,8 +9,8 @@ trait CarbonHelper
 {
     // ? Date Format
     /**
-     * init new self carbon.
-     * for customize the carbon it self.
+     * Init new self carbon.
+     * For customize the carbon it self.
      *
      * @return Carbon
      */
@@ -20,8 +20,8 @@ trait CarbonHelper
     }
 
     /**
-     * get full date time now
-     * for human
+     * Get full date time now.
+     * For human.
      *
      * @param string $dateStart default: now()
      * @return string
@@ -34,7 +34,7 @@ trait CarbonHelper
     }
 
     /**
-     * get date time now in timezone
+     * Get date time now in timezone
      *
      * @param string $dateStart default: now()
      * @return string
@@ -45,8 +45,8 @@ trait CarbonHelper
     }
 
     /**
-     * parse date time
-     * for human
+     * Parse date time.
+     * For human.
      *
      * @param string $datetime default: now()
      * @param string $split split only: date or time
@@ -64,8 +64,8 @@ trait CarbonHelper
     }
 
     /**
-     * parse date time
-     * for database
+     * Parse date time.
+     * For database.
      *
      * @param string $datetime default: now()
      * @param string $split split only: date or time
@@ -83,7 +83,7 @@ trait CarbonHelper
     }
 
     /**
-     * get interval date created from date updated
+     * Get interval date created from date updated
      *
      * @param string $date_created
      * @param string $date_updated
@@ -95,7 +95,7 @@ trait CarbonHelper
     }
 
     /**
-     * convert date time to timestamp
+     * Convert date time to timestamp
      *
      * @param string $datetime default: now()
      * @return string
@@ -111,7 +111,7 @@ trait CarbonHelper
     }
 
     /**
-     * convert timestamp to date time
+     * Convert timestamp to date time
      *
      * @param string $timestamp default: now()
      * @return string
@@ -125,8 +125,8 @@ trait CarbonHelper
     }
 
     /**
-     * convert date time to interval time from now
-     * for Human
+     * Convert date time to interval time from now.
+     * For Human.
      *
      * @param string $datetime date from_
      * @return string
@@ -137,8 +137,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add years from now
-     * for database
+     * Get date time by specific add years from now.
+     * For database.
      *
      * @param integer $years default: 1 year
      * @param string $dateStart default: now()
@@ -150,8 +150,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add months from now
-     * for database
+     * Get date time by specific add months from now.
+     * For database.
      *
      * @param integer $months default: 6 months
      * @param string $dateStart default: now()
@@ -163,8 +163,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add weeks from now
-     * for database
+     * Get date time by specific add weeks from now.
+     * For database.
      *
      * @param integer $weeks default: 1 week
      * @param string $dateStart default: now()
@@ -176,8 +176,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add days from now
-     * for database
+     * Get date time by specific add days from now.
+     * For database.
      *
      * @param integer $days default: 30 days
      * @param string $dateStart default: now()
@@ -189,8 +189,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add hours from now
-     * for database
+     * Get date time by specific add hours from now.
+     * For database.
      *
      * @param integer $hours default: 24 hours
      * @param string $dateStart default: now()
@@ -202,8 +202,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add minutes from now
-     * for database
+     * Get date time by specific add minutes from now.
+     * For database.
      *
      * @param integer $minutes default: 60 minutes
      * @param string $dateStart default: now()
@@ -215,8 +215,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific add seconds from now
-     * for database
+     * Get date time by specific add seconds from now.
+     * For database.
      *
      * @param integer $seconds default: 60 seconds
      * @param string $dateStart default: now()
@@ -228,8 +228,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub years from now
-     * for database
+     * Get date time by specific sub years from now.
+     * For database.
      *
      * @param integer $years default: 1 year
      * @param string $dateStart default: now()
@@ -241,8 +241,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub months from now
-     * for database
+     * Get date time by specific sub months from now.
+     * For database.
      *
      * @param integer $months default: 6 months
      * @param string $dateStart default: now()
@@ -254,8 +254,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub weeks from now
-     * for database
+     * Get date time by specific sub weeks from now.
+     * For database.
      *
      * @param integer $weeks default: 1 week
      * @param string $dateStart default: now()
@@ -267,8 +267,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub days from now
-     * for database
+     * Get date time by specific sub days from now.
+     * For database.
      *
      * @param integer $days default: 30 days
      * @param string $dateStart default: now()
@@ -280,8 +280,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub hours from now
-     * for database
+     * Get date time by specific sub hours from now.
+     * For database.
      *
      * @param integer $hours default: 24 hours
      * @param string $dateStart default: now()
@@ -293,8 +293,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub minutes from now
-     * for database
+     * Get date time by specific sub minutes from now.
+     * For database.
      *
      * @param integer $minutes default: 60 minutes
      * @param string $dateStart default: now()
@@ -306,8 +306,8 @@ trait CarbonHelper
     }
 
     /**
-     * get date time by specific sub seconds from now
-     * for database
+     * Get date time by specific sub seconds from now.
+     * For database.
      *
      * @param integer $seconds default: 60 seconds
      * @param string $dateStart default: now()
@@ -319,7 +319,7 @@ trait CarbonHelper
     }
 
     /**
-     * check is date given is equal with format given
+     * Check is date given is equal with format given
      *
      * @param string $date
      * @param string $format
@@ -334,7 +334,7 @@ trait CarbonHelper
 
     // ? Person
     /**
-     * convert date time to person age
+     * Convert date time to person age
      *
      * @param string $datetime human date of birth
      * @return string
@@ -345,7 +345,7 @@ trait CarbonHelper
     }
 
     /**
-     * convert date time to person born date full
+     * Convert date time to person born date full
      *
      * @param string $datetime human date of birth
      * @return array
@@ -362,7 +362,7 @@ trait CarbonHelper
     }
 
     /**
-     * check is person birthday today
+     * Check is person birthday today
      *
      * @param string $datetime human date of birth
      * @return boolean

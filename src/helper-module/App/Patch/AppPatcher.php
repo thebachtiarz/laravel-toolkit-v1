@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 trait AppPatcher
 {
     /**
-     * factory namespace resolver
+     * Factory namespace resolver
      *
      * @return void
      */

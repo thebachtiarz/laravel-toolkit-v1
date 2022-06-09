@@ -12,7 +12,7 @@ trait DataResponse
     use ResponseHelper, ErrorLogTrait;
 
     /**
-     * create response data
+     * Create response data
      *
      * @param mixed $data
      * @param string $message
@@ -33,7 +33,7 @@ trait DataResponse
     }
 
     /**
-     * create response error
+     * Create response error
      *
      * @param \Throwable $throwable
      * @return array
@@ -47,7 +47,7 @@ trait DataResponse
     }
 
     /**
-     * convert response service to response web page
+     * Convert response service to response web page
      *
      * @param array $response
      * @return array
@@ -74,7 +74,7 @@ trait DataResponse
     }
 
     /**
-     * convert response service to response rest api
+     * Convert response service to response rest api
      *
      * @param array $response
      * @return object
@@ -91,7 +91,7 @@ trait DataResponse
     }
 
     /**
-     * convert response service to response graphql api
+     * Convert response service to response graphql api
      *
      * @param array $response
      * @return array
@@ -108,7 +108,7 @@ trait DataResponse
     }
 
     /**
-     * data response json
+     * Data response json
      *
      * @param mixed $data
      * @param string $message
@@ -128,7 +128,7 @@ trait DataResponse
     }
 
     /**
-     * data response graphql
+     * Data response graphql
      *
      * @param mixed $data
      * @param string $message
@@ -141,7 +141,7 @@ trait DataResponse
     }
 
     /**
-     * error response json
+     * Error response json
      *
      * @param \Throwable $throwable
      * @return object
@@ -161,7 +161,7 @@ trait DataResponse
     }
 
     /**
-     * error response graphql
+     * Error response graphql
      *
      * @param \Throwable $throwable
      * @return array
@@ -180,7 +180,7 @@ trait DataResponse
     }
 
     /**
-     * get error data
+     * Get error data
      *
      * @param \Throwable $throwable
      * @return array

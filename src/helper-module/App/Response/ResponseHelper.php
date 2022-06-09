@@ -12,7 +12,7 @@ trait ResponseHelper
     private static string $error403 = "Sorry, you don't have access here";
 
     /**
-     * response resources with data
+     * Response resources with data
      *
      * @param mixed $response_data
      * @param string $status
@@ -39,7 +39,7 @@ trait ResponseHelper
     }
 
     /**
-     * return response in JSON format
+     * Return response in JSON format
      *
      * @param mixed $response_data
      * @param string $message
@@ -61,7 +61,7 @@ trait ResponseHelper
     }
 
     /**
-     * response error
+     * Response error
      *
      * @param string $message
      * @return array
@@ -72,7 +72,7 @@ trait ResponseHelper
     }
 
     /**
-     * response json error status
+     * Response json error status
      *
      * @param string $message
      * @param string $code
@@ -86,7 +86,7 @@ trait ResponseHelper
     }
 
     /**
-     * add paginate information if exist
+     * Add paginate information if exist
      *
      * @param array $initData original data without paginate information
      * @return array

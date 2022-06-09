@@ -13,7 +13,7 @@ class ConfigBackendService
 
     // ? Public Methods
     /**
-     * get config app name
+     * Get config app name
      *
      * @return string|null
      */
@@ -23,7 +23,7 @@ class ConfigBackendService
     }
 
     /**
-     * get config app url
+     * Get config app url
      *
      * @return string|null
      */
@@ -33,7 +33,7 @@ class ConfigBackendService
     }
 
     /**
-     * get config app timezone
+     * Get config app timezone
      *
      * @return string|null
      */
@@ -43,7 +43,7 @@ class ConfigBackendService
     }
 
     /**
-     * get config app prefix
+     * Get config app prefix
      *
      * @return string|null
      */
@@ -53,7 +53,7 @@ class ConfigBackendService
     }
 
     /**
-     * set config app name
+     * Set config app name
      *
      * @param string $appName
      * @return string|null
@@ -74,7 +74,7 @@ class ConfigBackendService
     }
 
     /**
-     * set config app url
+     * Set config app url
      *
      * @param string $appUrl
      * @return string|null
@@ -95,7 +95,7 @@ class ConfigBackendService
     }
 
     /**
-     * set config app timezone
+     * Set config app timezone
      *
      * @param string $appTimezone
      * @return string|null
@@ -116,7 +116,7 @@ class ConfigBackendService
     }
 
     /**
-     * set config app prefix
+     * Set config app prefix
      *
      * @param string $appPrefix
      * @return string|null
@@ -138,7 +138,7 @@ class ConfigBackendService
 
     // ? Private Methods
     /**
-     * config data template setter
+     * Config data template setter
      *
      * @param string $key
      * @param string $value
@@ -167,7 +167,7 @@ class ConfigBackendService
     }
 
     /**
-     * get config value
+     * Get config value
      *
      * @param string $configName
      * @return mixed
@@ -180,7 +180,7 @@ class ConfigBackendService
     }
 
     /**
-     * set config value
+     * Set config value
      *
      * @param string $configName
      * @param mixed $configValue

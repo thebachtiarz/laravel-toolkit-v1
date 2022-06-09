@@ -5,15 +5,15 @@ namespace TheBachtiarz\Toolkit\Console\Service;
 use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
 
 /**
- * this class is used for keeping your caches when you doing cache clean
- * but still want to keep some of caches
+ * This class is used for keeping your caches when you doing cache clean.
+ * But still want to keep some of caches.
  */
 class KeepCacheService
 {
     private static array $keepCacheName = [];
 
     /**
-     * your temporary cache data is stored here
+     * Temporary cache data
      *
      * @var array
      */
@@ -21,7 +21,7 @@ class KeepCacheService
 
     // ? Public Methods
     /**
-     * process to backup cache data into temporary data
+     * Process to backup cache data into temporary data
      *
      * @return self
      */
@@ -48,7 +48,7 @@ class KeepCacheService
     }
 
     /**
-     * process to restore temporary cache data into cache storage
+     * Process to restore temporary cache data into cache storage
      *
      * @return boolean
      */
@@ -73,7 +73,7 @@ class KeepCacheService
 
     // ? Setter Modules
     /**
-     * set keep cache name
+     * Set keep cache name
      *
      * @param array $keepCacheName
      * @return self

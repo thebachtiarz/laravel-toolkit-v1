@@ -11,7 +11,7 @@ class ScheduleCacheProcessService
     use ErrorLogTrait;
 
     /**
-     * run cache process on config schedule
+     * Run cache process on config schedule
      *
      * @return boolean
      */
@@ -19,7 +19,6 @@ class ScheduleCacheProcessService
     {
         try {
             $_classes = tbtoolkitconfig('app_refresh_cache_classes');
-
 
             foreach ($_classes as $key => $class) {
                 if (new $class instanceof ScheduleCacheInterface)

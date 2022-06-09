@@ -5,7 +5,7 @@ namespace TheBachtiarz\Toolkit\Config\Interfaces\Classes;
 interface ScheduleCacheInterface
 {
     /**
-     * cache process schedule service
+     * Cache process schedule service
      *
      * @return boolean
      */

@@ -5,7 +5,7 @@ namespace TheBachtiarz\Toolkit;
 class ApplicationToolkitService
 {
     /**
-     * list of commands from toolkit modules
+     * List of commands from toolkit modules
      */
     public const COMMANDS = [
         \TheBachtiarz\Toolkit\Console\Commands\AppRefreshCommand::class,
@@ -16,7 +16,7 @@ class ApplicationToolkitService
 
     // ? Public Methods
     /**
-     * register config
+     * Register config
      *
      * @return boolean
      */
@@ -32,7 +32,7 @@ class ApplicationToolkitService
     }
 
     /**
-     * register commands
+     * Register commands
      *
      * @return array
      */
@@ -47,7 +47,7 @@ class ApplicationToolkitService
 
     // ? Private Methods
     /**
-     * create directories
+     * Create directories
      *
      * @return void
      */
@@ -64,7 +64,7 @@ class ApplicationToolkitService
     }
 
     /**
-     * set configs
+     * Set configs
      *
      * @return void
      */

@@ -11,23 +11,23 @@ class ConfigHelper
     use ErrorLogTrait;
 
     /**
-     * config name.
-     * default: thebachtiarz_toolkit
+     * Config name.
+     * Default: thebachtiarz_toolkit.
      *
      * @var string
      */
     protected static string $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME;
 
     /**
-     * data type.
-     * default: null
+     * Data type.
+     * Default: null.
      *
      * @var string|null
      */
     protected static ?string $dataType = null;
 
     /**
-     * keep data type proposed is static
+     * Keep data type proposed is static
      *
      * @var boolean
      */
@@ -35,7 +35,7 @@ class ConfigHelper
 
     // ? Public Methods
     /**
-     * update config file value
+     * Update config file value
      *
      * @param string $key
      * @param mixed $value
@@ -53,9 +53,8 @@ class ConfigHelper
     }
 
     /**
-     * replace file config static value
-     *
-     * sample : [['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey]]
+     * Replace file config static value.
+     * Sample : [['key' => 'app_key', 'old' => config('thebachtiarz_toolkit.app_key'), 'new' => $newKey]].
      *
      * @param array[] $replaces
      * @return boolean
@@ -93,7 +92,7 @@ class ConfigHelper
 
     // ? Private Methods
     /**
-     * value resolver
+     * Value resolver
      *
      * @param mixed $value
      * @return mixed
@@ -123,7 +122,7 @@ class ConfigHelper
     }
 
     /**
-     * resolve tag value by data type
+     * Resolve tag value by data type
      *
      * @return string
      */

@@ -14,7 +14,7 @@ trait EncryptorHelper
     use ErrorLogTrait, CarbonHelper;
 
     /**
-     * encryption simple
+     * Encryption simple
      *
      * @param mixed $data
      * @return string|null
@@ -35,7 +35,7 @@ trait EncryptorHelper
     }
 
     /**
-     * decryption global
+     * Decryption global
      *
      * @param string $data
      * @return mixed
@@ -45,7 +45,7 @@ trait EncryptorHelper
         try {
             $_result = Crypt::decrypt($data);
 
-            // if type is not simple, then must be additional action here
+            // If type is not simple, then must be additional action here
 
             return $_result['data'];
         } catch (\Throwable $th) {

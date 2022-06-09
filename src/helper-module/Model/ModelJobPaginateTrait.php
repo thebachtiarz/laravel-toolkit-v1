@@ -13,14 +13,14 @@ trait ModelJobPaginateTrait
     //
 
     /**
-     * list paginate page
+     * List paginate page
      *
      * @var integer|null
      */
     protected static ?int $paginatePage = PaginateInterface::PAGINATE_CONFIG_RESULT_DEFAULT_INIT_PAGE;
 
     /**
-     * list paginate per page
+     * List paginate per page
      *
      * @var integer|null
      */
@@ -30,7 +30,7 @@ trait ModelJobPaginateTrait
 
     // ? Private Methods
     /**
-     * create simple paginate
+     * Create simple paginate
      *
      * @param string $class
      * @return object
@@ -44,8 +44,8 @@ trait ModelJobPaginateTrait
             PaginateCache::activatePaginate();
 
             $_result = $class::paginate(
-                perPage: PaginateCache::getPaginatePerPage() ?: self::$paginatePerPage,
-                page: PaginateCache::getPaginatePage() ?: self::$paginatePage
+                perPage: PaginateCache::getPaginatePerPage() ?: static::$paginatePerPage,
+                page: PaginateCache::getPaginatePage() ?: static::$paginatePage
             );
 
             self::addPaginateSummary($_result);
@@ -57,7 +57,7 @@ trait ModelJobPaginateTrait
     }
 
     /**
-     * add paginate summary information
+     * Add paginate summary information
      *
      * @param array|object $paginate
      * @return array
@@ -93,14 +93,14 @@ trait ModelJobPaginateTrait
      *
      * @param integer|null $perPage finance list paginate per page
      * @param integer|null $page finance list paginate pointer page
-     * @return self
+     * @return static
      */
-    public static function setPaginate(?int $perPage = null, ?int $page = null): self
+    public static function setPaginate(?int $perPage = null, ?int $page = null): static
     {
-        self::$paginatePerPage = $perPage ?: self::$paginatePerPage;
+        self::$paginatePerPage = $perPage ?: static::$paginatePerPage;
 
-        self::$paginatePage = $page ?: self::$paginatePage;
+        self::$paginatePage = $page ?: static::$paginatePage;
 
-        return new self;
+        return new static;
     }
 }

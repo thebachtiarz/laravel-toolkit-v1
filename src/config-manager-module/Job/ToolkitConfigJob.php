@@ -13,7 +13,7 @@ class ToolkitConfigJob
 
     // ? Public Methods
     /**
-     * get config data
+     * Get config data
      *
      * @param string $name
      * @param boolean $is_enable
@@ -38,7 +38,7 @@ class ToolkitConfigJob
     }
 
     /**
-     * set config data
+     * Set config data
      *
      * @param string $name
      * @param mixed $value
@@ -67,7 +67,7 @@ class ToolkitConfigJob
     }
 
     /**
-     * delete config data
+     * Delete config data
      *
      * @param string $name
      * @param string $access_group
@@ -88,7 +88,7 @@ class ToolkitConfigJob
 
     // ? Private Methods
     /**
-     * get config data
+     * Get config data
      *
      * @param string $name
      * @param boolean $is_enable
@@ -114,7 +114,7 @@ class ToolkitConfigJob
     }
 
     /**
-     * set config data
+     * Set config data
      *
      * @param string $name
      * @param string $value
@@ -141,7 +141,7 @@ class ToolkitConfigJob
     }
 
     /**
-     * delete config data
+     * Delete config data
      *
      * @param string $name
      * @param string $access_group
@@ -164,7 +164,7 @@ class ToolkitConfigJob
     }
 
     /**
-     * serialize config value
+     * Serialize config value
      *
      * @param mixed $value
      * @param boolean $is_encrypt
@@ -185,7 +185,7 @@ class ToolkitConfigJob
     }
 
     /**
-     * unserialize config value
+     * Unserialize config value
      *
      * @param string $value
      * @param boolean $is_encrypt

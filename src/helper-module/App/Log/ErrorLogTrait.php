@@ -15,8 +15,8 @@ trait ErrorLogTrait
     use ArrayHelper;
 
     /**
-     * log error from throwable object value.
-     * only execute not in production mode.
+     * Log error from throwable object value.
+     * Only execute not in production mode.
      *
      * @param \Throwable $throwable
      * @param string $logLevel

@@ -8,8 +8,8 @@ namespace TheBachtiarz\Toolkit\Helper\App\Data;
 trait StringHelper
 {
     /**
-     * create shuffle string.
-     * default: Upper Case Only
+     * Create shuffle string.
+     * Default: Upper Case Only
      *
      * @param integer $count
      * @param boolean $withLowerCase set true for adding lower case
@@ -28,8 +28,8 @@ trait StringHelper
     }
 
     /**
-     * create shuffle number.
-     * length: 1 - 10 Digit(s).
+     * Create shuffle number.
+     * Length: 1 - 10 Digit(s).
      *
      * @param integer $count
      * @return string

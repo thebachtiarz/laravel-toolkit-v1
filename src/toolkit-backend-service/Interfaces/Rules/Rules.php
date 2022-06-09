@@ -5,8 +5,8 @@ namespace TheBachtiarz\Toolkit\Backend\Interfaces\Rules;
 interface Rules
 {
     /**
-     * rules validator.
-     * use key name for validate input request.
+     * Rules validator.
+     * Use key name for validate input request.
      */
     public const RULES_VALIDATOR = [
         'name-simple' => [

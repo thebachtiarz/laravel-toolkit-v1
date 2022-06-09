@@ -8,7 +8,7 @@ use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 class Cache
 {
     /**
-     * cache app key
+     * Cache app key
      *
      * @return string
      */

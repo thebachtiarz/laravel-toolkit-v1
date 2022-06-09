@@ -7,8 +7,8 @@ use TheBachtiarz\Toolkit\Config\Interfaces\Data\ToolkitConfigInterface;
 class DataService
 {
     /**
-     * list of config who need to registered into current project.
-     * perform by toolkit app module.
+     * List of config who need to registered into current project.
+     * Perform by toolkit app module.
      *
      * @return array
      */
@@ -16,7 +16,7 @@ class DataService
     {
         $registerConfig = [];
 
-        // ! app
+        // ! App
         $registerConfig[] = [
             'app.name' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME),
             'app.url' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME),
@@ -24,12 +24,12 @@ class DataService
             'app.key' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
         ];
 
-        // ! cache
+        // ! Cache
         $registerConfig[] = [
             'cache.default' => 'database'
         ];
 
-        // ! cors paths
+        // ! Cors paths
         $_paths = config('cors.paths');
         $registerConfig[] = [
             'cors.paths' => array_merge(
@@ -38,7 +38,7 @@ class DataService
             )
         ];
 
-        // ! logging
+        // ! Logging
         $logging = config('logging.channels');
         $registerConfig[] = [
             'logging.channels' => array_merge(

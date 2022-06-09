@@ -8,7 +8,7 @@ use TheBachtiarz\Toolkit\Helper\App\Interfaces\ConverterInterface;
 trait ConverterHelper
 {
     /**
-     * convert to rupiah format currency
+     * Convert to rupiah format currency
      *
      * @param string|null $balance
      * @param boolean $decimal
@@ -22,8 +22,8 @@ trait ConverterHelper
     }
 
     /**
-     * convert underscored log type name,
-     * into human readable
+     * Convert underscored log type name,
+     * Into human readable
      *
      * @param string $logType
      * @return string

@@ -10,14 +10,14 @@ class PaginateCache
     //
 
     /**
-     * paginate page cache name
+     * Paginate page cache name
      *
      * @var string
      */
     private static string $paginatePageName = PaginateInterface::PAGINATE_PARAMS_PAGE_NAME;
 
     /**
-     * paginate per page cache name
+     * Paginate per page cache name
      *
      * @var string
      */
@@ -25,7 +25,7 @@ class PaginateCache
 
     // ? Public method
     /**
-     * reset paginate cache
+     * Reset paginate cache
      *
      * @return boolean
      */
@@ -33,8 +33,8 @@ class PaginateCache
     {
         try {
             Cache::delete(PaginateInterface::PAGINATE_CONDITION_NAME);
-            Cache::delete(self::$paginatePageName);
-            Cache::delete(self::$paginatePerPageName);
+            Cache::delete(static::$paginatePageName);
+            Cache::delete(static::$paginatePerPageName);
             Cache::delete(PaginateInterface::PAGINATE_SUMMARY_INFO_NAME);
 
             return true;
@@ -43,9 +43,9 @@ class PaginateCache
         }
     }
 
-    // ?  Setter Module
+    // ? Getter Module
     /**
-     * check paginate condition
+     * Check paginate condition
      *
      * @return boolean
      */
@@ -84,54 +84,55 @@ class PaginateCache
         return Cache::get(PaginateInterface::PAGINATE_SUMMARY_INFO_NAME);
     }
 
+    // ? Setter Module
     /**
      * Set paginate condition to active
      *
-     * @return self
+     * @return static
      */
-    public static function activatePaginate(): self
+    public static function activatePaginate(): static
     {
         Cache::setTemporary(PaginateInterface::PAGINATE_CONDITION_NAME, true);
 
-        return new self;
+        return new static;
     }
 
     /**
      * Set page paginate cache
      *
      * @param mixed $paginatePage page paginate cache
-     * @return self
+     * @return static
      */
-    public static function setPaginatePage(mixed $paginatePage = null): self
+    public static function setPaginatePage(mixed $paginatePage = null): static
     {
         Cache::setTemporary(self::$paginatePageName, $paginatePage);
 
-        return new self;
+        return new static;
     }
 
     /**
      * Set per page paginate cache
      *
      * @param mixed $paginatePerPage per page paginate cache
-     * @return self
+     * @return static
      */
-    public static function setPaginatePerPage(mixed $paginatePerPage = null): self
+    public static function setPaginatePerPage(mixed $paginatePerPage = null): static
     {
         Cache::setTemporary(self::$paginatePerPageName, $paginatePerPage);
 
-        return new self;
+        return new static;
     }
 
     /**
      * Set paginate summary info
      *
      * @param array $paginateSummaryInfo
-     * @return self
+     * @return static
      */
-    public static function setPaginateSummaryInfo(array $paginateSummaryInfo): self
+    public static function setPaginateSummaryInfo(array $paginateSummaryInfo): static
     {
         Cache::setTemporary(PaginateInterface::PAGINATE_SUMMARY_INFO_NAME, $paginateSummaryInfo);
 
-        return new self;
+        return new static;
     }
 }

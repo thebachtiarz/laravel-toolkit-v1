@@ -11,35 +11,35 @@ class ToolkitConfigService
     use ErrorLogTrait;
 
     /**
-     * config name
+     * Config name
      *
      * @var string
      */
     protected static string $name;
 
     /**
-     * config access group
+     * Config access group
      *
      * @var string
      */
     protected static string $accessGroup = ToolkitConfigInterface::TOOLKIT_CONFIG_PUBLIC_CODE;
 
     /**
-     * config is enable
+     * Config is enable
      *
      * @var boolean
      */
     protected static bool $isEnable = true;
 
     /**
-     * config is encrypt
+     * Config is encrypt
      *
      * @var boolean
      */
     protected static bool $isEncrypt = false;
 
     /**
-     * config value
+     * Config value
      *
      * @var mixed
      */
@@ -47,11 +47,9 @@ class ToolkitConfigService
 
     // ? Public Methods
     /**
-     * get config service
-     *
-     * ! require: name
-     *
-     * ? extra: isEnable, accessGroup
+     * Get config service.
+     * ! Require: name.
+     * ? Extra: isEnable, accessGroup.
      *
      * @return mixed
      */
@@ -71,11 +69,9 @@ class ToolkitConfigService
     }
 
     /**
-     * set config service
-     *
-     * ! require: name, value
-     *
-     * ? extra: isEncrypt, accessGroup
+     * Set config service.
+     * ! Require: name, value.
+     * ? Extra: isEncrypt, accessGroup.
      *
      * @return boolean
      */
@@ -95,11 +91,9 @@ class ToolkitConfigService
     }
 
     /**
-     * delete config service
-     *
-     * ! require: name
-     *
-     * ? extra: accessGroup
+     * Delete config service.
+     * ! Require: name.
+     * ? Extra: accessGroup.
      *
      * @return boolean
      */
@@ -120,7 +114,7 @@ class ToolkitConfigService
 
     // ? Private Methods
     /**
-     * create arguments
+     * Create arguments
      *
      * @param array $arguments
      * @return array|null

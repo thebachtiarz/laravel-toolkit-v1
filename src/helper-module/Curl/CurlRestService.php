@@ -15,21 +15,21 @@ trait CurlRestService
     use ArrayHelper, ErrorLogTrait;
 
     /**
-     * header curl
+     * Header curl
      *
      * @var array
      */
     protected static array $header = [];
 
     /**
-     * url domain curl
+     * Url domain curl
      *
      * @var string
      */
     protected static string $url = "";
 
     /**
-     * data body curl
+     * Data body curl
      *
      * @var array
      */
@@ -37,7 +37,7 @@ trait CurlRestService
 
     // ? Public Methods
     /**
-     * curl post
+     * Curl post
      *
      * @return array
      */
@@ -51,12 +51,12 @@ trait CurlRestService
             $_result = self::jsonDecode($_post);
 
             /**
-             * if there is validation errors
+             * If there is validation errors
              */
             throw_if(in_array("errors", array_keys($_result)), 'Exception', $_result['message']);
 
             /**
-             * if return status is not success
+             * If return status is not success
              */
             throw_if($_result['status'] !== "success", 'Exception', $_result['message']);
 
@@ -74,7 +74,7 @@ trait CurlRestService
 
     // ? Private Methods
     /**
-     * create pre curl custom
+     * Create pre curl custom
      *
      * @return PendingRequest
      */
@@ -91,7 +91,7 @@ trait CurlRestService
     }
 
     /**
-     * base domain resolver
+     * Base domain resolver
      *
      * @param boolean $secure
      * @return string
@@ -102,7 +102,7 @@ trait CurlRestService
     }
 
     /**
-     * url end point resolver
+     * Url end point resolver
      *
      * @return string
      */
@@ -118,7 +118,7 @@ trait CurlRestService
     }
 
     /**
-     * data form resolver
+     * Data form resolver
      *
      * @return array
      */

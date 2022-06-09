@@ -18,7 +18,7 @@ class AppRequestValidator
 
     // ? Public Methods.
     /**
-     * validate input request
+     * Validate input request
      *
      * @param Request $request
      * @param array $validates
@@ -38,7 +38,7 @@ class AppRequestValidator
     }
 
     /**
-     * custom error response for AppRequestValidator::class
+     * Custom error response for AppRequestValidator::class
      *
      * @param ValidatorReturn $validator
      * @return object
@@ -50,7 +50,7 @@ class AppRequestValidator
 
     // ? Private Methods.
     /**
-     * get requests data
+     * Get requests data
      *
      * @return array
      */
@@ -71,7 +71,7 @@ class AppRequestValidator
     }
 
     /**
-     * get rules data
+     * Get rules data
      *
      * @return array
      */
@@ -92,7 +92,7 @@ class AppRequestValidator
     }
 
     /**
-     * get messages data
+     * Get messages data
      *
      * @return array
      */

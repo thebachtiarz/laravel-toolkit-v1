@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache as LaravelCache;
 class Cache
 {
     /**
-     * check is cache available by key
+     * Check is cache available by key
      *
      * @param string $cacheName
      * @return boolean
@@ -18,7 +18,7 @@ class Cache
     }
 
     /**
-     * get cache by key
+     * Get cache by key
      *
      * @param string $cacheName
      * @return mixed
@@ -29,7 +29,7 @@ class Cache
     }
 
     /**
-     * set cache data forever
+     * Set cache data forever
      *
      * @param string $cacheName
      * @param mixed $value
@@ -41,7 +41,7 @@ class Cache
     }
 
     /**
-     * set cache data temporary with time to live
+     * Set cache data temporary with time to live
      *
      * @param string $cacheName
      * @param mixed $value
@@ -54,7 +54,7 @@ class Cache
     }
 
     /**
-     * delete a cache data by key
+     * Delete a cache data by key
      *
      * @param string $cacheName
      * @return boolean
@@ -65,7 +65,7 @@ class Cache
     }
 
     /**
-     * erase/remove all cache data
+     * Erase/Remove all cache data
      *
      * @return boolean
      */

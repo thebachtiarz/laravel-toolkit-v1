@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class ToolkitServiceProvider extends ServiceProvider
 {
     /**
-     * register module toolkit
+     * Register module toolkit
      *
      * @return void
      */
@@ -23,7 +23,7 @@ class ToolkitServiceProvider extends ServiceProvider
     }
 
     /**
-     * boot module toolkit
+     * Boot module toolkit
      *
      * @return void
      */

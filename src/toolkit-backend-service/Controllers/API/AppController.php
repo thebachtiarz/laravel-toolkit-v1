@@ -14,7 +14,7 @@ class AppController extends Controller
     use ResponseHelper;
 
     /**
-     * get app name
+     * Get app name
      *
      * @param Request $request
      * @return Response
@@ -29,7 +29,7 @@ class AppController extends Controller
     }
 
     /**
-     * get app name
+     * Get app name
      *
      * @param Request $request
      * @return Response
@@ -44,7 +44,7 @@ class AppController extends Controller
     }
 
     /**
-     * get app name
+     * Get app name
      *
      * @param Request $request
      * @return Response
@@ -59,7 +59,7 @@ class AppController extends Controller
     }
 
     /**
-     * get app prefix
+     * Get app prefix
      *
      * @param Request $request
      * @return Response
@@ -74,7 +74,7 @@ class AppController extends Controller
     }
 
     /**
-     * set app name
+     * Set app name
      *
      * @param Request $request
      * @return Response
@@ -93,7 +93,7 @@ class AppController extends Controller
     }
 
     /**
-     * set app url
+     * Set app url
      *
      * @param Request $request
      * @return Response
@@ -112,7 +112,7 @@ class AppController extends Controller
     }
 
     /**
-     * set app timezone
+     * Set app timezone
      *
      * @param Request $request
      * @see timezone_identifiers_list or \DateTimeZone::listIdentifiers()
@@ -132,7 +132,7 @@ class AppController extends Controller
     }
 
     /**
-     * set app prefix
+     * Set app prefix
      *
      * @param Request $request
      * @return Response

@@ -3,12 +3,12 @@
 use TheBachtiarz\Toolkit\ToolkitInterface;
 
 /**
- * thebachtiarz toolkit config
+ * TheBachtiarz toolkit config
  *
  * @param string|null $keyName config key name | null will return all
  * @return mixed
  */
-function tbtoolkitconfig(?string $keyName = null)
+function tbtoolkitconfig(?string $keyName = null): mixed
 {
     $configName = ToolkitInterface::TOOLKIT_CONFIG_NAME;
 
@@ -18,7 +18,7 @@ function tbtoolkitconfig(?string $keyName = null)
 }
 
 /**
- * get location from thebachtiarz directory
+ * Get location from thebachtiarz directory
  *
  * @param string|null $subDir
  * @return string
@@ -31,7 +31,7 @@ function tbdirlocation(?string $subDir = null): string
 }
 
 /**
- * thebachtiarz toolkit route api file location
+ * TheBachtiarz toolkit route api file location
  *
  * @return string
  */

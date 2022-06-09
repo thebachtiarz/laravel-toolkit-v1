@@ -7,7 +7,7 @@ use Illuminate\Encryption\Encrypter;
 class ApplicationService
 {
     /**
-     * generate base64 key.
+     * Generate base64 key.
      *
      * @return string
      */

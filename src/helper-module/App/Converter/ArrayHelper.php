@@ -5,7 +5,7 @@ namespace TheBachtiarz\Toolkit\Helper\App\Converter;
 trait ArrayHelper
 {
     /**
-     * result collection to single key array data
+     * Result collection to single key array data
      *
      * @param array $arrayData
      * @param string $objectKey
@@ -23,7 +23,7 @@ trait ArrayHelper
     }
 
     /**
-     * get value only from collection(s).
+     * Get value only from collection(s).
      *
      * @param mixed $collections
      * @param string $objectKey
@@ -44,7 +44,7 @@ trait ArrayHelper
     }
 
     /**
-     * encode data to string (json)
+     * Encode data to string (json)
      *
      * @param mixed $data
      * @return string
@@ -55,7 +55,7 @@ trait ArrayHelper
     }
 
     /**
-     * decode string to origin data
+     * Decode string to origin data
      *
      * @param string $data
      * @param boolean $associative
@@ -67,7 +67,7 @@ trait ArrayHelper
     }
 
     /**
-     * convert to string
+     * Convert to string
      *
      * @param mixed $value
      * @return string|null
@@ -78,7 +78,7 @@ trait ArrayHelper
     }
 
     /**
-     * convert to original data
+     * Convert to original data
      *
      * @param string $value
      * @return mixed
