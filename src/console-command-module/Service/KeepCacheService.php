@@ -2,7 +2,7 @@
 
 namespace TheBachtiarz\Toolkit\Console\Service;
 
-use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
+use TheBachtiarz\Toolkit\Cache\Service\Cache;
 
 /**
  * This class is used for keeping your caches when you doing cache clean.
@@ -10,6 +10,11 @@ use TheBachtiarz\Toolkit\Cache\Service\Cache as CacheService;
  */
 class KeepCacheService
 {
+    /**
+     * Keep cache(s) based on name
+     *
+     * @var array
+     */
     private static array $keepCacheName = [];
 
     /**
@@ -23,27 +28,23 @@ class KeepCacheService
     /**
      * Process to backup cache data into temporary data
      *
-     * @return self
+     * @return static
      */
-    public static function backupCache(): self
+    public static function backupCache(): static
     {
         try {
-            if (count(self::$keepCacheName)) {
+            if (count(static::$keepCacheName)) {
                 $_temporaries = [];
 
-                foreach (self::$keepCacheName as $key => $cacheName) {
-                    $_checkCacheData = CacheService::has($cacheName);
-
-                    if ($_checkCacheData)
-                        $_temporaries[] = [$cacheName => CacheService::get($cacheName)];
-                }
+                foreach (static::$keepCacheName as $key => $cacheName)
+                    if (Cache::has($cacheName))
+                        $_temporaries[] = [$cacheName => Cache::get($cacheName)];
 
                 self::$cacheDataBackup = $_temporaries;
             }
         } catch (\Throwable $th) {
-            //
         } finally {
-            return new self;
+            return new static;
         }
     }
 
@@ -57,13 +58,12 @@ class KeepCacheService
         $result = false;
 
         try {
-            if (count(self::$cacheDataBackup))
-                foreach (self::$cacheDataBackup as $key => $temporaryCache)
-                    CacheService::set(key($temporaryCache), $temporaryCache[key($temporaryCache)]);
+            if (count(static::$cacheDataBackup))
+                foreach (static::$cacheDataBackup as $key => $temporaryCache)
+                    Cache::set(key($temporaryCache), $temporaryCache[key($temporaryCache)]);
 
             $result = true;
         } catch (\Throwable $th) {
-            //
         } finally {
             return $result;
         }
@@ -76,12 +76,12 @@ class KeepCacheService
      * Set keep cache name
      *
      * @param array $keepCacheName
-     * @return self
+     * @return static
      */
-    public static function setKeepCacheName(array $keepCacheName): self
+    public static function setKeepCacheName(array $keepCacheName): static
     {
         self::$keepCacheName = $keepCacheName;
 
-        return new self;
+        return new static;
     }
 }

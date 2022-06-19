@@ -52,7 +52,7 @@ interface GlobalValidatorInterface
     /**
      * Input sentences
      */
-    public const RULES_REGEX_SENTENCES = "regex:/^[\v\w\s\-\_,.]+$/";
+    public const RULES_REGEX_SENTENCES = "regex:/^[\v\w\s\-\_:,.]+$/";
 
     /**
      * Allowed import image extension

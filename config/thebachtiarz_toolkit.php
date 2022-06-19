@@ -126,5 +126,16 @@ return [
     | -> TheBachtiarz\Toolkit\Config\Interfaces\Classes\ScheduleCacheInterface;
     |
     */
-    'app_refresh_cache_classes' => []
+    'app_refresh_cache_classes' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Keep cache service
+    |--------------------------------------------------------------------------
+    |
+    | This option keep cache(s) from reset.
+    | Set cache name as key.
+    |
+    */
+    'app_keep_cache_data' => [],
 ];

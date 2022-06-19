@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\{Artisan, Log};
 use Symfony\Component\Process\Process;
+use TheBachtiarz\Toolkit\Console\Service\KeepCacheService;
 use TheBachtiarz\Toolkit\Console\Service\ScheduleCacheProcessService;
 
 class AppRefreshCommand extends Command
@@ -51,13 +52,19 @@ class AppRefreshCommand extends Command
 
             Log::channel('maintenance')->info('~~ Application is now in maintenance mode.');
 
-            foreach (tbtoolkitconfig('app_refresh_artisan_commands_before') as $key => $command) {
-                Artisan::call($command['command']);
+            /**
+             * Keep cache(s) process
+             */
+            KeepCacheService::setKeepCacheName(tbtoolkitconfig('app_keep_cache_data'))->backupCache();
 
-                Log::channel('maintenance')->info($command['message']);
-            }
+            /**
+             * Run artisan command before
+             */
+            $this->runCommands(tbtoolkitconfig('app_refresh_artisan_commands_before'));
 
-            // any module who need caching is execute here...
+            /**
+             * Any module who need caching is execute here
+             */
             if (count(tbtoolkitconfig('app_refresh_cache_classes')))
                 ScheduleCacheProcessService::runSchedule();
 
@@ -65,11 +72,15 @@ class AppRefreshCommand extends Command
 
             Log::channel('maintenance')->info('+ Composer successfully regenerate autoload.');
 
-            foreach (tbtoolkitconfig('app_refresh_artisan_commands_after') as $key => $command) {
-                Artisan::call($command['command']);
+            /**
+             * Run artisan command after
+             */
+            $this->runCommands(tbtoolkitconfig('app_refresh_artisan_commands_after'));
 
-                Log::channel('maintenance')->info($command['message']);
-            }
+            /**
+             * Restore keep cache(s) into database
+             */
+            KeepCacheService::restoreCache();
 
             (new Process(explode(' ', 'php artisan up')))->run();
 
@@ -84,6 +95,21 @@ class AppRefreshCommand extends Command
             Log::channel('maintenance')->info('');
 
             return $result;
+        }
+    }
+
+    /**
+     * Run commands from config
+     *
+     * @param array $commands
+     * @return void
+     */
+    private function runCommands(array $commands = []): void
+    {
+        foreach ($commands as $key => $command) {
+            Artisan::call($command['command']);
+
+            Log::channel('maintenance')->info($command['message']);
         }
     }
 }
