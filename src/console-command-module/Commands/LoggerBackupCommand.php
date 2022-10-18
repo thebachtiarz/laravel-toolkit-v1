@@ -41,11 +41,11 @@ class LoggerBackupCommand extends Command
         $result = 0;
 
         try {
-            $this->info('----> Logger backup, started...');
+            $this->info('======> Logger backup, started...');
 
             (new Process(explode(' ', 'php artisan down')))->run();
 
-            $this->info('~~ Application is now in maintenance mode.');
+            $this->info('======> Application is now in maintenance mode.');
 
             $_zipFileLocation = "backup/log/logger_backup_" . date("ymd") . ".zip";
 
@@ -53,21 +53,21 @@ class LoggerBackupCommand extends Command
 
             (new Process(explode(' ', "zip -r $_zipFileLocation $_logDirLocation"), tbdirlocation()))->run();
 
-            $this->info('- Log files compressed');
+            $this->info('======> Log files compressed');
 
             (new Process(explode(' ', "rm -r $_logDirLocation"), tbdirlocation()))->run();
 
-            $this->info('- Log files deleted');
+            $this->info('======> Log files deleted');
 
             (new Process(explode(' ', 'php artisan up')))->run();
 
-            $this->info('~~ Application is now live.');
+            $this->info('======> Application is now live.');
 
-            $this->info('----> Logger backup, success');
+            $this->info('======> Logger backup, success');
 
             $result = 1;
         } catch (\Throwable $th) {
-            $this->warning('----> Logger backup, failed : ' . $th->getMessage() . $th->getLine());
+            $this->warning('======> Logger backup, failed : ' . $th->getMessage() . $th->getLine());
         } finally {
             if (!is_dir(tbdirlocation("log")))
                 mkdir(tbdirlocation("log"), 0755, true);
