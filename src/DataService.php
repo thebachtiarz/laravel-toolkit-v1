@@ -23,6 +23,15 @@ class DataService
             'app.timezone' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME),
             'app.key' => tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_KEY_NAME)
         ];
+        $_providers = config('app.providers');
+        $registerConfig[] = [
+            'app.providers' => array_merge(
+                $_providers,
+                [
+                    \TheBachtiarz\Toolkit\Backend\RouteServiceProvider::class
+                ]
+            )
+        ];
 
         // ! Cache
         $registerConfig[] = [
