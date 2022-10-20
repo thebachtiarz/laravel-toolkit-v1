@@ -35,14 +35,6 @@ php artisan vendor:publish --provider="TheBachtiarz\Toolkit\ToolkitServiceProvid
 php artisan migrate
 ```
 
-- register the REST API into -> **app/Providers/RouteServiceProvider.php**
-```bash
-Route::prefix(tbtoolkitconfig('app_prefix'))
-    ->middleware(['api'])
-    ->namespace($this->namespace)
-    ->group(tbtoolkitrouteapi());
-```
-
 -------
 ## Feature
 
