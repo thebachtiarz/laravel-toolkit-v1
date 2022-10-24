@@ -3,6 +3,7 @@
 namespace TheBachtiarz\Toolkit\Helper\Curl;
 
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http as CURL;
 use TheBachtiarz\Toolkit\Helper\App\Converter\ArrayHelper;
 use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
@@ -37,39 +38,27 @@ trait CurlRestService
 
     // ? Public Methods
     /**
+     * Curl get
+     *
+     * @return array
+     */
+    public static function get(): array
+    {
+        $_post = self::curl()->get(self::urlResolver(), self::dataResolver());
+
+        return self::responseResolver($_post);
+    }
+
+    /**
      * Curl post
      *
      * @return array
      */
     public static function post(): array
     {
-        $result = ['status' => false, 'data' => null, 'message' => ""];
+        $_post = self::curl()->post(self::urlResolver(), self::dataResolver());
 
-        try {
-            $_post = self::curl()->post(self::urlResolver(), self::dataResolver());
-
-            $_result = self::jsonDecode($_post);
-
-            /**
-             * If there is validation errors
-             */
-            throw_if(in_array("errors", array_keys($_result)), 'Exception', $_result['message']);
-
-            /**
-             * If return status is not success
-             */
-            throw_if($_result['status'] !== "success", 'Exception', $_result['message']);
-
-            $result['data'] = $_result['response_data'];
-            $result['status'] = $_result['status'] === "success";
-            $result['message'] = $_result['message'];
-        } catch (\Throwable $th) {
-            self::logCatch($th);
-
-            $result['message'] = $th->getMessage();
-        } finally {
-            return $result;
-        }
+        return self::responseResolver($_post);
     }
 
     // ? Private Methods
@@ -88,6 +77,46 @@ trait CurlRestService
             $_headers = array_merge($_headers, self::$header);
 
         return CURL::withHeaders($_headers);
+    }
+
+    /**
+     * Curl response resolver
+     *
+     * @param Response $response
+     * @return array
+     */
+    private static function responseResolver(Response $response): array
+    {
+        $result = ['status' => false, 'data' => null, 'message' => ''];
+
+        try {
+            $_response = $response->json();
+
+            /**
+             * If there is validation errors
+             */
+            throw_if(in_array("errors", array_keys($_response)), 'Exception', $_response['message']);
+
+            /**
+             * If there is no 'status' indexes. Assume there is an error in the result.
+             */
+            throw_if(!@$_response['status'], 'Exception', $_response['message']);
+
+            /**
+             * If return status is not success
+             */
+            throw_if($_response['status'] !== "success", 'Exception', $_response['message']);
+
+            $result['data'] = $_response['response_data'];
+            $result['status'] = $_response['status'] === "success";
+            $result['message'] = $_response['message'];
+        } catch (\Throwable $th) {
+            self::logCatch($th);
+
+            $result['message'] = $th->getMessage();
+        } finally {
+            return $result;
+        }
     }
 
     /**
