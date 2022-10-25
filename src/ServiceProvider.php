@@ -2,9 +2,9 @@
 
 namespace TheBachtiarz\Toolkit;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
-class ToolkitServiceProvider extends ServiceProvider
+class ServiceProvider extends LaravelServiceProvider
 {
     /**
      * Register module toolkit

@@ -27,12 +27,22 @@ composer require thebachtiarz/laravel-toolkit-v1
 
 - vendor publish
 ``` bash
-php artisan vendor:publish --provider="TheBachtiarz\Toolkit\ToolkitServiceProvider"
+php artisan vendor:publish --provider="TheBachtiarz\Toolkit\ServiceProvider"
 ```
 
 - database migration
 ``` bash
 php artisan migrate
+```
+
+- generate application key
+``` bash
+php artisan thebachtiarz:toolkit:key:generate
+```
+
+- setup caches config etc.
+``` bash
+php artisan thebachtiarz:toolkit:app:refresh
 ```
 
 -------
