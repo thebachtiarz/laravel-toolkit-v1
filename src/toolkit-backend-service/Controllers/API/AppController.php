@@ -25,7 +25,7 @@ class AppController extends Controller
             ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_NAME_NAME)
             ?? '';
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -40,7 +40,7 @@ class AppController extends Controller
             ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_URL_NAME)
             ?? '';
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -55,7 +55,7 @@ class AppController extends Controller
             ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_TIMEZONE_NAME)
             ?? '';
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -70,7 +70,7 @@ class AppController extends Controller
             ?? tbtoolkitconfig(ToolkitConfigInterface::TOOLKIT_CONFIG_APP_PREFIX_NAME)
             ?? '';
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -89,7 +89,7 @@ class AppController extends Controller
 
         $config = ConfigBackendService::setAppName($request->name);
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -108,7 +108,7 @@ class AppController extends Controller
 
         $config = ConfigBackendService::setAppUrl($request->url);
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -128,7 +128,7 @@ class AppController extends Controller
 
         $config = ConfigBackendService::setAppTimezone($request->timezone);
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 
     /**
@@ -147,6 +147,6 @@ class AppController extends Controller
 
         $config = ConfigBackendService::setAppPrefix($request->url);
 
-        return self::JsonResponse($config);
+        return self::jsonResponse($config);
     }
 }

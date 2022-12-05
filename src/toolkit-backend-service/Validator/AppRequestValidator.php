@@ -2,6 +2,7 @@
 
 namespace TheBachtiarz\Toolkit\Backend\Validator;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator as ValidatorReturn;
@@ -13,7 +14,18 @@ class AppRequestValidator
 {
     use ResponseHelper, ErrorLogTrait;
 
-    private static object $request;
+    /**
+     * Request
+     *
+     * @var Request
+     */
+    private static Request $request;
+
+    /**
+     * validates
+     *
+     * @var array
+     */
     private static array $validates;
 
     // ? Public Methods.
@@ -41,11 +53,11 @@ class AppRequestValidator
      * Custom error response for AppRequestValidator::class
      *
      * @param ValidatorReturn $validator
-     * @return object
+     * @return JsonResponse
      */
-    public static function responseError(ValidatorReturn $validator): object
+    public static function responseError(ValidatorReturn $validator): JsonResponse
     {
-        return self::JsonResponse(self::errorResponse($validator->errors()), "Input request failed", 202, "error");
+        return self::jsonResponse(self::errorResponse($validator->errors()), "Input request failed", 202, "error");
     }
 
     // ? Private Methods.

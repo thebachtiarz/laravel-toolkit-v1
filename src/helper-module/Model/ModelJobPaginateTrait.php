@@ -2,6 +2,8 @@
 
 namespace TheBachtiarz\Toolkit\Helper\Model;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
 use TheBachtiarz\Toolkit\Helper\Interfaces\Data\PaginateInterface;
 
@@ -33,17 +35,17 @@ trait ModelJobPaginateTrait
      * Create simple paginate
      *
      * @param string $class
-     * @return object
+     * @return LengthAwarePaginator
      * @throws \Throwable
      */
-    private static function paginateSimple(string $class): object
+    private static function paginateSimple(Model $model): LengthAwarePaginator
     {
         try {
-            throw_if(!class_exists($class), 'Exception', sprintf("Class %s not exist", $class));
+            throw_if(!class_exists($model), 'Exception', sprintf("Class %s not exist", $model));
 
             PaginateCache::activatePaginate();
 
-            $_result = $class::paginate(
+            $_result = $model::paginate(
                 perPage: PaginateCache::getPaginatePerPage() ?: static::$paginatePerPage,
                 page: PaginateCache::getPaginatePage() ?: static::$paginatePage
             );

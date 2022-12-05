@@ -2,6 +2,7 @@
 
 namespace TheBachtiarz\Toolkit\Helper\App\Response;
 
+use Illuminate\Http\JsonResponse;
 use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 /**
@@ -77,9 +78,9 @@ trait DataResponse
      * Convert response service to response rest api
      *
      * @param array $response
-     * @return object
+     * @return JsonResponse
      */
-    private static function responseApiRest(array $response): object
+    private static function responseApiRest(array $response): JsonResponse
     {
         try {
             throw_if(!$response['status'], 'Exception', '');
@@ -115,7 +116,7 @@ trait DataResponse
      * @param integer $resCode
      * @param string $resStatus
      * @param string $resTime
-     * @return object
+     * @return JsonResponse
      */
     private static function responseDataJson(
         mixed $data,
@@ -123,8 +124,8 @@ trait DataResponse
         int $resCode = 200,
         string $resStatus = "",
         string $resTime = ""
-    ): object {
-        return self::JsonResponse($data, $message, $resCode, $resStatus, $resTime);
+    ): JsonResponse {
+        return self::jsonResponse($data, $message, $resCode, $resStatus, $resTime);
     }
 
     /**
@@ -144,15 +145,15 @@ trait DataResponse
      * Error response json
      *
      * @param \Throwable $throwable
-     * @return object
+     * @return JsonResponse
      */
-    private static function responseErrorJson(\Throwable $throwable): object
+    private static function responseErrorJson(\Throwable $throwable): JsonResponse
     {
         self::logCatch($throwable);
 
         $_errorData = self::getErrorData($throwable);
 
-        return self::JsonResponse(
+        return self::jsonResponse(
             $_errorData,
             $_errorData['message'],
             $throwable->getCode() ?: 202,

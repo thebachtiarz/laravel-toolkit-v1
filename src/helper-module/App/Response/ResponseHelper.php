@@ -2,6 +2,7 @@
 
 namespace TheBachtiarz\Toolkit\Helper\App\Response;
 
+use Illuminate\Http\JsonResponse;
 use TheBachtiarz\Toolkit\Helper\App\Carbon\CarbonHelper;
 use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
 use TheBachtiarz\Toolkit\Helper\Cache\PaginatorCache;
@@ -54,15 +55,15 @@ trait ResponseHelper
      * @param integer $httpRes
      * @param string $status
      * @param string $time
-     * @return object
+     * @return JsonResponse
      */
-    private static function JsonResponse(
+    private static function jsonResponse(
         mixed $response_data,
         string $message = "",
         int $httpRes = 200,
         string $status = "",
         string $time = ""
-    ): object {
+    ): JsonResponse {
         $response = self::dataResponse($response_data, $status, $message, $time);
 
         return response()->json($response, $httpRes);
@@ -84,9 +85,9 @@ trait ResponseHelper
      *
      * @param string $message
      * @param string $code
-     * @return object
+     * @return JsonResponse
      */
-    private static function _throwErrorResponse(string $message = "", string $code = ""): object
+    private static function _throwErrorResponse(string $message = "", string $code = ""): JsonResponse
     {
         $setMsg = $message ? $message : self::$error403;
         $setCode = $code ? $code : "403";
