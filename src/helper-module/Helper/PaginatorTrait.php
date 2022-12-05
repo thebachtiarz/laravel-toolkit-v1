@@ -14,50 +14,40 @@ trait PaginatorTrait
      *
      * @var array|null
      */
-    private ?array $itemsRequestSort = null;
+    private static ?array $itemsRequestSort = null;
 
     // ? Public Methods
 
     // ? Private Modules
     /**
-     * Init paginate
-     *
-     * @return self
-     */
-    public function initPaginate(): self
-    {
-        return $this;
-    }
-
-    /**
      * Get paginate result
      *
-     * @param array $itemsResult
-     * @param integer $pageSize
+     * @param array $resultData
+     * @param integer $perPage
      * @param integer $currentPage
      * @return array
      */
-    private function getPaginateResult(
-        array $itemsResult = [],
-        int $pageSize = 10,
+    private static function getPaginateResult(
+        array $resultData = [],
+        int $perPage = 10,
         int $currentPage = 1
     ): array {
         $_result = [
-            'items' => [],
+            'result' => [],
             'page_info' => [
-                'page_size' => $pageSize,
+                'per_page' => $perPage,
                 'current_page' => $currentPage,
                 'total_pages' => 1
             ],
-            'total_count' => count($itemsResult)
+            'total_count' => count($resultData)
         ];
 
         /**
          * Sorting process data result
          */
-        if ($this->itemsRequestSort) {
-            foreach ($this->itemsRequestSort as $attribute => $type) {
-                $itemsResult = $this->sortArrayResult($itemsResult, $attribute, $type);
+        if (static::$itemsRequestSort) {
+            foreach (static::$itemsRequestSort as $attribute => $type) {
+                $resultData = static::sortArrayResult($resultData, $attribute, $type);
             }
         }
 
@@ -66,7 +56,7 @@ trait PaginatorTrait
         /**
          * Set total page
          */
-        $_result['page_info']['total_pages'] = ceil($_result['total_count'] / $pageSize);
+        $_result['page_info']['total_pages'] = ceil($_result['total_count'] / $perPage);
 
         /**
          * Define current page
@@ -79,21 +69,21 @@ trait PaginatorTrait
                 /**
                  * Define start - finish item index
                  */
-                $_indexStart = (($currentPage - 1) * $pageSize);
-                $_indexFinish = $_result['total_count'] < ($currentPage * $pageSize)
+                $_indexStart = (($currentPage - 1) * $perPage);
+                $_indexFinish = $_result['total_count'] < ($currentPage * $perPage)
                     ? $_result['total_count']
-                    : ($currentPage * $pageSize);
+                    : ($currentPage * $perPage);
 
                 for ($_indexItem = $_indexStart; $_indexItem < $_indexFinish; $_indexItem++) {
                     if (($_indexItem + 1) > $_result['total_count']) break;
-                    if (count($_dataResult) >= $pageSize) break;
+                    if (count($_dataResult) >= $perPage) break;
 
-                    $_dataResult[] = $itemsResult[$_indexItem];
+                    $_dataResult[] = $resultData[$_indexItem];
                 }
             }
         }
 
-        $_result['items'] = $_dataResult;
+        $_result['result'] = $_dataResult;
 
         return $_result;
     }
@@ -106,7 +96,7 @@ trait PaginatorTrait
      * @param string $sortType
      * @return array
      */
-    private function sortArrayResult(array $data, string $key = 'name', $sortType = 'ASC'): array
+    private static function sortArrayResult(array $data, string $key = 'name', $sortType = 'ASC'): array
     {
         usort($data, function ($a, $b) use ($sortType, $key) {
             if ($sortType === 'ASC') return $a[$key] <=> $b[$key];
@@ -122,12 +112,12 @@ trait PaginatorTrait
      *
      * @param string $attributeName
      * @param string $sortType
-     * @return self
+     * @return static
      */
-    private function addPaginateSort(string $attributeName, string $sortType = 'ASC'): self
+    private static function addPaginateSort(string $attributeName, string $sortType = 'ASC'): static
     {
-        $this->itemsRequestSort[$attributeName] = $sortType;
+        static::$itemsRequestSort[$attributeName] = $sortType;
 
-        return $this;
+        return new static;
     }
 }

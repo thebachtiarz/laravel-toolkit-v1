@@ -53,6 +53,16 @@ class PaginatorCache
 
     // ? Getter Modules
     /**
+     * Is paginator enable
+     *
+     * @return boolean
+     */
+    public static function isEnable(): bool
+    {
+        return static::$enable;
+    }
+
+    /**
      * Get current page
      *
      * @return integer default: 1

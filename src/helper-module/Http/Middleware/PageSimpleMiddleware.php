@@ -17,6 +17,8 @@ class PageSimpleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        PaginatorCache::enable();
+
         if ($request->has('currentPage') || $request->has('perPage')) {
             PaginatorCache::setCurrentPage($request->get('currentPage'))->setPerPage($request->get('perPage'));
         } else {

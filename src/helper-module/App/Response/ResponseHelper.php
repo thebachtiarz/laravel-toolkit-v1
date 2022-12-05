@@ -4,10 +4,12 @@ namespace TheBachtiarz\Toolkit\Helper\App\Response;
 
 use TheBachtiarz\Toolkit\Helper\App\Carbon\CarbonHelper;
 use TheBachtiarz\Toolkit\Helper\Cache\PaginateCache;
+use TheBachtiarz\Toolkit\Helper\Cache\PaginatorCache;
+use TheBachtiarz\Toolkit\Helper\Helper\PaginatorTrait;
 
 trait ResponseHelper
 {
-    use CarbonHelper;
+    use CarbonHelper, PaginatorTrait;
 
     private static string $error403 = "Sorry, you don't have access here";
 
@@ -33,7 +35,13 @@ trait ResponseHelper
             'response_data' => $response_data
         ];
 
-        $_responses = self::addPaginateInformation($_responses);
+        if (PaginatorCache::isEnable()) {
+            $_responses = self::addPaginatorInformation($_responses);
+        }
+
+        if (PaginateCache::isPaginateActive()) {
+            $_responses = self::addPaginateInformation($_responses);
+        }
 
         return $_responses;
     }
@@ -86,23 +94,38 @@ trait ResponseHelper
     }
 
     /**
+     * Modify response data for paginate availability
+     *
+     * @param array $initData
+     * @return array
+     */
+    private static function addPaginatorInformation(array $initData): array
+    {
+        try {
+            $initData['response_data'] = self::getPaginateResult(
+                $initData['response_data'],
+                PaginatorCache::getPerPage(),
+                PaginatorCache::getCurrentPage()
+            );
+        } catch (\Throwable $th) {
+        } finally {
+            return $initData;
+        }
+    }
+
+    /**
      * Add paginate information if exist
      *
-     * @param array $initData original data without paginate information
+     * @param array $initData
      * @return array
      */
     private static function addPaginateInformation(array $initData): array
     {
         try {
-            /**
-             * set data paginate information
-             */
-            if (PaginateCache::isPaginateActive()) {
-                $initData = array_merge(
-                    $initData,
-                    PaginateCache::getPaginateSummaryInfo()
-                );
-            }
+            $initData = array_merge(
+                $initData,
+                PaginateCache::getPaginateSummaryInfo()
+            );
         } catch (\Throwable $th) {
         } finally {
             return $initData;
