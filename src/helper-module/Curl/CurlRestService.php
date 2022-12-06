@@ -10,6 +10,9 @@ use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
 
 /**
  * Curl Rest Service
+ *
+ * @deprecated 2.0.18 Use AbstractCurl instead
+ * @see \TheBachtiarz\Toolkit\Helper\Curl\AbstractCurl
  */
 trait CurlRestService
 {
