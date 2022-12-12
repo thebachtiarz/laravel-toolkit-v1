@@ -73,7 +73,7 @@ return [
     | Here you can specify the mode to allow the system to write logs.
     |
     */
-    'logger_mode' => ["local", "developer"],
+    'logger_mode' => ["local", "developer", "production"],
 
     /*
     |--------------------------------------------------------------------------

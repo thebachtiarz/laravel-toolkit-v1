@@ -57,9 +57,17 @@ class DataService
                         'driver' => 'single',
                         'path' => tbdirlocation("log/application.log")
                     ],
+                    'curl' => [
+                        'driver' => 'single',
+                        'path' => tbdirlocation("log/curl.log")
+                    ],
                     'developer' => [
                         'driver' => 'single',
                         'path' => tbdirlocation("log/developer.log")
+                    ],
+                    'production' => [
+                        'driver' => 'single',
+                        'path' => tbdirlocation("log/production.log")
                     ],
                     'error' => [
                         'driver' => 'single',

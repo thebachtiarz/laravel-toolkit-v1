@@ -6,6 +6,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http as CURL;
 use TheBachtiarz\Toolkit\Helper\App\Log\ErrorLogTrait;
+use TheBachtiarz\Toolkit\Helper\Curl\Data\CurlResolverData;
 
 abstract class AbstractCurl
 {
@@ -52,9 +53,9 @@ abstract class AbstractCurl
     /**
      * Send request with method: GET
      *
-     * @return array
+     * @return CurlResolverData
      */
-    public function get(): array
+    public function get(): CurlResolverData
     {
         return $this->sendRequest('get');
     }
@@ -62,9 +63,9 @@ abstract class AbstractCurl
     /**
      * Send request with method: POST
      *
-     * @return array
+     * @return CurlResolverData
      */
-    public function post(): array
+    public function post(): CurlResolverData
     {
         return $this->sendRequest('post');
     }
@@ -88,9 +89,9 @@ abstract class AbstractCurl
      * Request curl send
      *
      * @param string $method
-     * @return array
+     * @return CurlResolverData
      */
-    protected function sendRequest(string $method): array
+    protected function sendRequest(string $method): CurlResolverData
     {
         $pendingRequest = $this->curl();
 
@@ -128,9 +129,9 @@ abstract class AbstractCurl
      * Request curl response
      *
      * @param Response $response
-     * @return array
+     * @return CurlResolverData
      */
-    private function response(Response $response): array
+    private function response(Response $response): CurlResolverData
     {
         $result = ['status' => false, 'data' => null, 'message' => ''];
 
@@ -160,7 +161,7 @@ abstract class AbstractCurl
 
             $result['message'] = $th->getMessage();
         } finally {
-            return $result;
+            return new CurlResolverData($result);
         }
     }
 
