@@ -133,7 +133,7 @@ abstract class AbstractCurl
      */
     private function response(Response $response): CurlResolverData
     {
-        $result = ['status' => false, 'data' => null, 'message' => ''];
+        $result = ['code' => $response->status(), 'status' => false, 'data' => null, 'message' => ''];
 
         try {
             $_response = $response->json();

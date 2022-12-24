@@ -10,6 +10,13 @@ class CurlResolverData
     //
 
     /**
+     * Status code
+     *
+     * @var integer|null
+     */
+    private ?int $code = null;
+
+    /**
      * Status
      *
      * @var boolean
@@ -40,6 +47,7 @@ class CurlResolverData
         $this->setStatus(@$responseData['status'] ?? $this->status);
         $this->setMessage(@$responseData['message'] ?? $this->message);
         $this->setData(@$responseData['data'] ?? $this->data);
+        $this->setCode(@$responseData['code'] ?? $this->code);
 
         if (mb_strlen($this->message) && is_array($this->data)) {
             $this->addLogger();
@@ -55,6 +63,7 @@ class CurlResolverData
     public function toArray(): array
     {
         return [
+            'code' => $this->getCode(),
             'status' => $this->getStatus(),
             'message' => $this->getMessage(),
             'data' => $this->getData()
@@ -80,6 +89,16 @@ class CurlResolverData
     }
 
     // ? Getter Modules
+    /**
+     * Get status code
+     *
+     * @return integer|null
+     */
+    public function getCode(): ?int
+    {
+        return $this->code;
+    }
+
     /**
      * Get response status
      *
@@ -116,6 +135,19 @@ class CurlResolverData
     }
 
     // ? Setter Modules
+    /**
+     * Set status code
+     *
+     * @param integer|null $code
+     * @return self
+     */
+    public function setCode(?int $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
     /**
      * Set response status
      *
